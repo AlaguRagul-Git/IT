@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALAGU RAGUL M | IT Support Portfolio</title>
+    <title>ALAGU RAGUL M | IT Infrastructure Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -18,7 +18,7 @@
         @media print {
             nav, .no-print, .footer-actions, #canvas-web { display: none !important; }
             body { background: white !important; }
-            .glow-card { border: 1px solid #ccc !important; box-shadow: none !important; }
+            .glow-card { border: 1px solid #ddd !important; break-inside: avoid; }
             .glow-card::before { display: none !important; }
         }
 
@@ -32,53 +32,30 @@
 
         #canvas-web {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: #ffffff;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: #ffffff;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        .container { max-width: 950px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
 
         nav { 
-            padding: 15px 0; 
-            background: rgba(255, 255, 255, 0.9); 
-            backdrop-filter: blur(12px);
-            position: sticky; 
-            top: 0; 
-            z-index: 9999;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 0; background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(12px); position: sticky; top: 0; 
+            z-index: 9999; border-bottom: 1px solid #e2e8f0;
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; }
 
         .btn-hire { 
-            background: var(--dark);
-            color: white; 
-            padding: 10px 25px; 
-            border-radius: 8px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
+            background: var(--dark); color: white; padding: 10px 25px; 
+            border-radius: 8px; font-weight: 800; cursor: pointer; border: none;
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
         }
         .btn-hire:hover { background: var(--primary); transform: translateY(-2px); }
 
         .dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 55px;
-            background: white;
-            min-width: 280px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 12px;
-            padding: 8px;
-            border: 1px solid #e2e8f0;
+            display: none; position: absolute; right: 0; top: 55px;
+            background: white; min-width: 280px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px; padding: 8px; border: 1px solid #e2e8f0;
         }
         .dropdown.show { display: block; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -87,76 +64,45 @@
 
         header { text-align: center; margin: 60px 0; }
         .cyber-name { 
-            font-size: 4rem; 
-            font-weight: 900; 
-            color: var(--dark);
-            text-transform: uppercase;
-            letter-spacing: -2px;
+            font-size: 4.5rem; font-weight: 900; color: var(--dark);
+            text-transform: uppercase; letter-spacing: -2px;
             background: linear-gradient(180deg, #0f172a 30%, #64748b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .glow-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            padding: 35px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px);
+            padding: 35px; border-radius: 20px; margin-bottom: 30px;
+            position: relative; overflow: hidden; border: 1px solid #e2e8f0;
         }
         .glow-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(transparent, transparent, var(--primary), transparent);
             animation: rotate 6s linear infinite;
         }
-        .glow-card::after {
-            content: '';
-            position: absolute; inset: 2px;
-            background: white; border-radius: 18px;
-        }
+        .glow-card::after { content: ''; position: absolute; inset: 2px; background: white; border-radius: 18px; }
         .card-content { position: relative; z-index: 2; }
         @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .achievement-box { 
-            background: #f0fdf4; 
-            padding: 20px; 
-            border-radius: 12px; 
-            border-left: 5px solid #10b981;
-            margin: 20px 0;
-            font-size: 0.95rem;
-            color: #14532d;
+            background: #f0fdf4; padding: 20px; border-radius: 12px; 
+            border-left: 5px solid #10b981; margin: 20px 0;
+            font-size: 0.95rem; color: #14532d;
         }
 
         ul { list-style: none; }
-        li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 0.95rem; line-height: 1.6; }
+        li { margin-bottom: 12px; padding-left: 20px; position: relative; font-size: 0.95rem; line-height: 1.6; }
         li::before { content: "•"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
 
         .footer-actions { text-align: center; margin: 80px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .btn-unique {
-            padding: 16px 32px;
-            font-size: 0.9rem;
-            font-weight: 900;
-            border-radius: 8px;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
+            padding: 16px 32px; font-size: 0.9rem; font-weight: 900; border-radius: 8px;
+            cursor: pointer; border: none; display: flex; align-items: center; gap: 12px;
+            transition: 0.3s; color: white; text-decoration: none; text-transform: uppercase;
         }
         .btn-cv { background: #1e293b; }
         .btn-cl { background: var(--primary); }
         .btn-unique:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-
-        @media (max-width: 768px) { .cyber-name { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
@@ -187,25 +133,7 @@
         <section class="glow-card">
             <div class="card-content">
                 <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL SUMMARY</h2>
-                <p>IT Support Engineer with hands-on L1/L2 experience supporting enterprise users in corporate environments. Proven ability to handle high-volume ticket queues, resolve hardware, OS, network, and email issues within SLA, and reduce downtime through structured troubleshooting. Experienced in Active Directory user management, endpoint support, vendor coordination, and IT asset management. Strong at root-cause analysis and documentation. Seeking growth toward IT operations/ senior desktop support roles.</p>
-            </div>
-        </section>
-
-        <section class="glow-card">
-            <div class="card-content">
-                <h2 style="margin-bottom:20px; font-weight:900; color: var(--dark);">CORE SKILLS</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                    <div>
-                        <p><strong>Operating Systems:</strong> Windows 10/11, Windows Server (User & basic admin tasks), macOS (basic)</p>
-                        <p style="margin-top:10px;"><strong>IT Support:</strong> L1/L2 Support, Service Desk Operations, Incident & Request Management, SLA Compliance, Remote & Onsite Support</p>
-                        <p style="margin-top:10px;"><strong>Hardware:</strong> Desktops, Laptops, Printers, Scanners, Peripherals</p>
-                    </div>
-                    <div>
-                        <p><strong>Networking:</strong> LAN/WAN, TCP/IP, DNS, DHCP, Wi‑Fi, VPN Troubleshooting</p>
-                        <p style="margin-top:10px;"><strong>Tools:</strong> Microsoft 365, Outlook (PST/OST), Remote Desktop, AnyDesk, TeamViewer</p>
-                        <p style="margin-top:10px;"><strong>IT Operations:</strong> Active Directory (User & Group Management), Antivirus Monitoring, Patch Management, IT Asset Management, Vendor Coordination</p>
-                    </div>
-                </div>
+                <p>IT Support Engineer with hands-on L1/L2 experience supporting enterprise users in corporate environments. Proven ability to handle high-volume ticket queues, resolve hardware, OS, network, and email issues within SLA, and reduce downtime through structured troubleshooting. Experienced in Active Directory user management, endpoint support, vendor coordination, and IT asset management. Strong at root-cause analysis and documentation.</p>
             </div>
         </section>
 
@@ -216,101 +144,15 @@
                 <p><strong>Ahluwalia Contracts (India) Ltd. – Mumbai</strong> | April 2024 – Present</p>
 
                 <div class="achievement-box">
-                    <strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.
+                    <strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning.
                 </div>
 
+                <h4 style="margin: 15px 0 10px; color: var(--dark);">Detailed Responsibilities:</h4>
                 <ul>
-                    <li>Act as first point of contact for IT support, resolving L1/L2 incidents related to hardware, Windows OS, applications, email, and network connectivity.</li>
-                    <li>Handle high-volume service requests and incidents via email and service desk tools while consistently meeting SLA targets.</li>
-                    <li>Install, configure, and troubleshoot Windows 10/11 systems, MS Office, Outlook, and end-user applications.</li>
-                    <li>Manage Active Directory tasks including user creation, password resets, access permissions, and basic group management.</li>
-                    <li>Diagnose and resolve LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity issues to minimize user downtime.</li>
-                    <li>Provide remote and onsite support using AnyDesk, TeamViewer, and Remote Desktop.</li>
-                    <li>Support enterprise email platforms including Zimbra and Exchange (basic troubleshooting).</li>
-                    <li>Perform endpoint security tasks such as antivirus monitoring, patch updates, and system health checks.</li>
-                    <li>Coordinate with vendors, OEMs, and ISPs for hardware replacements, warranty claims, and network escalations.</li>
-                    <li>Assist in root cause analysis (RCA) for recurring issues and document permanent fixes.</li>
-                    <li>Maintain IT asset records, SOPs, technical documentation, and knowledge base articles.</li>
-                    <li>Support employee onboarding and offboarding by provisioning system access and configuring devices.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="glow-card">
-            <div class="card-content">
-                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">EDUCATION</h2>
-                <p><strong>Master of Business Administration (MBA) – Financial Management</strong></p>
-                <p>Alagappa University | Dec 2024 | CGPA: 7.0</p>
-                <p style="margin-top:15px;"><strong>Bachelor of Computer Applications (BCA)</strong></p>
-                <p>Kalasalingam Academy of Research and Education | Jun 2021 | CGPA: 6.83</p>
-            </div>
-        </section>
-
-        <section class="glow-card">
-            <div class="card-content">
-                <h2 style="margin-bottom:10px; font-weight:900; color: var(--dark);">CERTIFICATIONS</h2>
-                <p>CCNA – Networking Fundamentals</p>
-                <h2 style="margin: 20px 0 10px; font-weight:900; color: var(--dark);">ADDITIONAL INFORMATION</h2>
-                <p>Languages: English, Tamil, Hindi | Notice Period: 30 Days</p>
-            </div>
-        </section>
-
-        <div class="footer-actions no-print">
-            <a href="resume.pdf" download class="btn-unique btn-cv"><i class="fas fa-file-pdf"></i> Download Resume</a>
-            <a href="coverletter.pdf" download class="btn-unique btn-cl"><i class="fas fa-envelope-open-text"></i> Cover Letter</a>
-        </div>
-
-        <footer style="text-align:center; padding-bottom:40px; color:#94a3b8; font-size:0.8rem;">
-            © 2026 ALAGU RAGUL M | IT Support Portfolio
-        </footer>
-    </div>
-
-    <script>
-        // SPIDER WEB ENGINE
-        const canvas = document.getElementById('canvas-web');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const properties = { count: 80, speed: 0.5, lineLength: 150, particleColor: 'rgba(37, 99, 235, 0.2)', lineColor: 'rgba(37, 99, 235, 0.1)' };
-
-        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-        window.onresize();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.velX = (Math.random() - 0.5) * properties.speed;
-                this.velY = (Math.random() - 0.5) * properties.speed;
-            }
-            update() {
-                if (this.x < 0 || this.x > canvas.width) this.velX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.velY *= -1;
-                this.x += this.velX; this.y += this.velY;
-            }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fillStyle = properties.particleColor; ctx.fill(); }
-        }
-
-        function init() { for (let i = 0; i < properties.count; i++) particles.push(new Particle()); loop(); }
-
-        function loop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i in particles) {
-                particles[i].update(); particles[i].draw();
-                for (let j in particles) {
-                    let dist = Math.sqrt(Math.pow(particles[i].x - particles[j].x, 2) + Math.pow(particles[i].y - particles[j].y, 2));
-                    if (dist < properties.lineLength) {
-                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = properties.lineColor; ctx.lineWidth = 1; ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(loop);
-        }
-
-        function toggleMenu() { document.getElementById("hireMenu").classList.toggle("show"); }
-        window.onclick = function(e) { if (!e.target.closest('.btn-hire')) { var m = document.getElementById("hireMenu"); if (m.classList.contains('show')) m.classList.remove('show'); } }
-
-        init();
-    </script>
-</body>
-</html>
+                    <li><strong>Infrastructure Operations:</strong> Act as first point of contact for L1/L2 incidents related to hardware, Windows OS, and network connectivity.</li>
+                    <li><strong>Systems Administration:</strong> Manage Active Directory tasks including user creation, password resets, access permissions, and basic group policy management.</li>
+                    <li><strong>Network Troubleshooting:</strong> Diagnose and resolve LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity issues to minimize downtime.</li>
+                    <li><strong>Software & OS Management:</strong> Install, configure, and troubleshoot Windows 10/11 systems, MS Office, Outlook, and specialized end-user applications.</li>
+                    <li><strong>Endpoint Security:</strong> Perform antivirus monitoring, patch updates, and system health checks to ensure security compliance.</li>
+                    <li><strong>Remote Support:</strong> Provide high-quality technical assistance using AnyDesk, TeamViewer, and Remote Desktop tools.</li>
+                    <li><strong>Email Administration
