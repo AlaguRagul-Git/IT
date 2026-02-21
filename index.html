@@ -27,6 +27,7 @@
             color: var(--text); 
             font-family: 'Inter', system-ui, sans-serif;
             overflow-x: hidden;
+            position: relative;
         }
 
         #canvas-web {
@@ -114,8 +115,8 @@
             <div style="position: relative;">
                 <button class="btn-hire" onclick="toggleMenu()">HIRE ME <i class="fas fa-chevron-circle-down"></i></button>
                 <div class="dropdown" id="hireMenu">
-                    <a href="mailto:ragulmariyappan@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="https://www.linkedin.com/in/alagu-ragul-it" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="mailto:ragulmariyappan@gmail.com"><i class="fas fa-envelope"></i> ragulmariyappan@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/alagu-ragul-it" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
                     <a href="tel:+917845714920"><i class="fas fa-phone"></i> +91 78457 14920</a>
                 </div>
             </div>
@@ -126,25 +127,75 @@
         <header>
             <h1 class="cyber-name">ALAGU RAGUL M</h1>
             <p style="font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-top: 10px;">IT Support Engineer | L1/L2 | Windows, AD, Networking</p>
+            <p style="margin-top: 5px; color: var(--text);">Tamil Nadu, India | +91 78457 14920 | ragulmariyappan@gmail.com</p>
         </header>
+
+        <section class="glow-card">
+            <div class="card-content">
+                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL SUMMARY</h2>
+                <p>IT Support Engineer with hands-on L1/L2 experience supporting enterprise users in corporate environments. Proven ability to handle high-volume ticket queues, resolve hardware, OS, network, and email issues within SLA, and reduce downtime through structured troubleshooting. Experienced in Active Directory user management, endpoint support, vendor coordination, and IT asset management.</p>
+            </div>
+        </section>
+
+        <section class="glow-card">
+            <div class="card-content">
+                <h2 style="margin-bottom:20px; font-weight:900; color: var(--dark);">CORE SKILLS</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <div>
+                        <p><strong>Operating Systems:</strong> Windows 10/11, Windows Server, macOS</p>
+                        <p style="margin-top:10px;"><strong>IT Support:</strong> Incident & Request Management, SLA Compliance, Remote & Onsite Support</p>
+                    </div>
+                    <div>
+                        <p><strong>Networking:</strong> LAN/WAN, TCP/IP, DNS, DHCP, Wi‑Fi, VPN</p>
+                        <p style="margin-top:10px;"><strong>Tools:</strong> M365, Active Directory, AnyDesk, TeamViewer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glow-card">
+            <div class="card-content">
+                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL EXPERIENCE</h2>
+                <h3 style="color:var(--primary); font-size: 1.3rem;">IT Support Engineer</h3>
+                <p><strong>Ahluwalia Contracts (India) Ltd. – Mumbai</strong> | April 2024 – Present</p>
+
+                <div class="achievement-box">
+                    <strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, and Active Directory user provisioning.
+                </div>
+
+                <ul>
+                    <li>Resolving L1/L2 incidents related to hardware, Windows OS, applications, and email.</li>
+                    <li>Managing Active Directory: User creation, password resets, and permissions.</li>
+                    <li>Diagnosing LAN, Wi‑Fi, VPN, and DHCP connectivity issues.</li>
+                    <li>Endpoint security monitoring and system patch updates.</li>
+                    <li>Vendor coordination for hardware replacements and network escalations.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="glow-card">
+            <div class="card-content">
+                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">EDUCATION</h2>
+                <p><strong>MBA:</strong> Alagappa University | Dec 2024 | CGPA: 7.0</p>
+                <p><strong>BCA:</strong> Kalasalingam Academy | Jun 2021 | CGPA: 6.83</p>
+            </div>
+        </section>
 
         <div class="footer-actions no-print">
             <a href="Alagu Ragul IT Support Engineer Resume.pdf" download class="btn-unique btn-cv">
                 <i class="fas fa-file-pdf"></i> Download Resume
             </a>
-            
             <a href="Alagu_Ragul_M_IT_Support_Cover_Letter.pdf" download class="btn-unique btn-cl">
                 <i class="fas fa-envelope-open-text"></i> Cover Letter
             </a>
         </div>
 
         <footer style="text-align:center; padding-bottom:40px; color:#94a3b8; font-size:0.8rem;">
-            © 2026 ALAGU RAGUL M | Professional Portfolio
+            © 2026 ALAGU RAGUL M | IT Professional
         </footer>
     </div>
 
     <script>
-        // SPIDER WEB ENGINE
         const canvas = document.getElementById('canvas-web');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -169,7 +220,6 @@
         }
 
         function init() { for (let i = 0; i < properties.count; i++) particles.push(new Particle()); loop(); }
-
         function loop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i in particles) {
@@ -184,10 +234,8 @@
             }
             requestAnimationFrame(loop);
         }
-
         function toggleMenu() { document.getElementById("hireMenu").classList.toggle("show"); }
         window.onclick = function(e) { if (!e.target.closest('.btn-hire')) { var m = document.getElementById("hireMenu"); if (m.classList.contains('show')) m.classList.remove('show'); } }
-
         init();
     </script>
 </body>
