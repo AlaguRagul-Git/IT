@@ -27,7 +27,6 @@
             color: var(--text); 
             font-family: 'Inter', system-ui, sans-serif;
             overflow-x: hidden;
-            position: relative;
         }
 
         #canvas-web {
@@ -115,8 +114,8 @@
             <div style="position: relative;">
                 <button class="btn-hire" onclick="toggleMenu()">HIRE ME <i class="fas fa-chevron-circle-down"></i></button>
                 <div class="dropdown" id="hireMenu">
-                    <a href="mailto:ragulmariyappan@gmail.com"><i class="fas fa-envelope"></i> ragulmariyappan@gmail.com</a>
-                    <a href="https://www.linkedin.com/in/alagu-ragul-it" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
+                    <a href="mailto:ragulmariyappan@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://www.linkedin.com/in/alagu-ragul-it" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
                     <a href="tel:+917845714920"><i class="fas fa-phone"></i> +91 78457 14920</a>
                 </div>
             </div>
@@ -127,32 +126,69 @@
         <header>
             <h1 class="cyber-name">ALAGU RAGUL M</h1>
             <p style="font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-top: 10px;">IT Support Engineer | L1/L2 | Windows, AD, Networking</p>
-            <p style="margin-top: 5px; color: var(--text);">Tamil Nadu, India | +91 78457 14920 | ragulmariyappan@gmail.com</p>
         </header>
 
-        <section class="glow-card">
-            <div class="card-content">
-                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL SUMMARY</h2>
-                <p>IT Support Engineer with hands-on L1/L2 experience supporting enterprise users in corporate environments. Proven ability to handle high-volume ticket queues, resolve hardware, OS, network, and email issues within SLA, and reduce downtime through structured troubleshooting. Experienced in Active Directory user management, endpoint support, vendor coordination, and IT asset management. Strong at root-cause analysis and documentation.</p>
-            </div>
-        </section>
+        <div class="footer-actions no-print">
+            <a href="Alagu Ragul IT Support Engineer Resume.pdf" download class="btn-unique btn-cv">
+                <i class="fas fa-file-pdf"></i> Download Resume
+            </a>
+            
+            <a href="Alagu_Ragul_M_IT_Support_Cover_Letter.pdf" download class="btn-unique btn-cl">
+                <i class="fas fa-envelope-open-text"></i> Cover Letter
+            </a>
+        </div>
 
-        <section class="glow-card">
-            <div class="card-content">
-                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL EXPERIENCE</h2>
-                <h3 style="color:var(--primary); font-size: 1.3rem;">IT Support Engineer</h3>
-                <p><strong>Ahluwalia Contracts (India) Ltd. – Mumbai</strong> | April 2024 – Present</p>
+        <footer style="text-align:center; padding-bottom:40px; color:#94a3b8; font-size:0.8rem;">
+            © 2026 ALAGU RAGUL M | Professional Portfolio
+        </footer>
+    </div>
 
-                <div class="achievement-box">
-                    <strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning.
-                </div>
+    <script>
+        // SPIDER WEB ENGINE
+        const canvas = document.getElementById('canvas-web');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const properties = { count: 80, speed: 0.5, lineLength: 150, particleColor: 'rgba(37, 99, 235, 0.2)', lineColor: 'rgba(37, 99, 235, 0.1)' };
 
-                <h4 style="margin: 15px 0 10px; color: var(--dark);">Detailed Responsibilities:</h4>
-                <ul>
-                    <li><strong>Infrastructure Operations:</strong> Act as first point of contact for L1/L2 incidents related to hardware, Windows OS, and network connectivity.</li>
-                    <li><strong>Systems Administration:</strong> Manage Active Directory tasks including user creation, password resets, access permissions, and basic group policy management.</li>
-                    <li><strong>Network Troubleshooting:</strong> Diagnose and resolve LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity issues to minimize downtime.</li>
-                    <li><strong>Software & OS Management:</strong> Install, configure, and troubleshoot Windows 10/11 systems, MS Office, Outlook, and specialized end-user applications.</li>
-                    <li><strong>Endpoint Security:</strong> Perform antivirus monitoring, patch updates, and system health checks to ensure security compliance.</li>
-                    <li><strong>Remote Support:</strong> Provide high-quality technical assistance using AnyDesk, TeamViewer, and Remote Desktop tools.</li>
-                    <li><strong>Email Administration
+        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+        window.onresize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.velX = (Math.random() - 0.5) * properties.speed;
+                this.velY = (Math.random() - 0.5) * properties.speed;
+            }
+            update() {
+                if (this.x < 0 || this.x > canvas.width) this.velX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.velY *= -1;
+                this.x += this.velX; this.y += this.velY;
+            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fillStyle = properties.particleColor; ctx.fill(); }
+        }
+
+        function init() { for (let i = 0; i < properties.count; i++) particles.push(new Particle()); loop(); }
+
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i in particles) {
+                particles[i].update(); particles[i].draw();
+                for (let j in particles) {
+                    let dist = Math.sqrt(Math.pow(particles[i].x - particles[j].x, 2) + Math.pow(particles[i].y - particles[j].y, 2));
+                    if (dist < properties.lineLength) {
+                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = properties.lineColor; ctx.lineWidth = 1; ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(loop);
+        }
+
+        function toggleMenu() { document.getElementById("hireMenu").classList.toggle("show"); }
+        window.onclick = function(e) { if (!e.target.closest('.btn-hire')) { var m = document.getElementById("hireMenu"); if (m.classList.contains('show')) m.classList.remove('show'); } }
+
+        init();
+    </script>
+</body>
+</html>
