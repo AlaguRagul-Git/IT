@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALAGU RAGUL M | IT Support Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
             --dark: #0f172a;
             --text: #334155;
+            --light-text: #475569;
             --bg: #ffffff;
-            --terminal-bg: #0a0f1c;
-            --terminal-text: #d4f1ff;
-            --accent: #00eaff;
-            --accent-dim: #00aaff;
-            --grid: rgba(0, 234, 255, 0.06);
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --soft-border: #e2e8f0;
+            --shadow-soft: 0 20px 50px -15px rgba(0,0,0,0.14);
+            --shadow-inset: inset 0 2px 10px rgba(0,0,0,0.04);
+            --glow-subtle: 0 0 0 1px rgba(37,99,235,0.08), 0 0 30px rgba(37,99,235,0.05);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -185,7 +185,7 @@
             opacity: 0.8;
         }
 
-        /* FAB (unchanged) */
+        /* FAB unchanged */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
         .fab-main { width: 60px; height: 60px; background: #000; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); transition: 0.4s; }
         .fab-list { display: none; flex-direction: column; gap: 10px; align-items: flex-end; }
@@ -194,186 +194,183 @@
         .fab-item { background: white; color: black; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; border: 2px solid black; cursor: pointer; transition: 0.3s; box-shadow: 4px 4px 0px black; }
         .fab-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--primary); color: var(--primary); }
 
-        /* ────────────────────────────────────────
-           UNIQUE SUBSECTION STYLE – TERMINAL V2
-           ──────────────────────────────────────── */
+        /* ────────────────────────────────
+           NEW UNIQUE SUBSECTION STYLE
+           Clean • Elegant • Premium • Subtle depth
+           ──────────────────────────────── */
         .portal-overlay {
             position: fixed; inset: 0;
-            background: rgba(5, 10, 25, 0.96);
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(10px);
             z-index: 10000;
             visibility: hidden; opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex; align-items: center; justify-content: center;
-            padding: 20px;
+            padding: 25px;
         }
-        .portal-overlay.active { visibility: visible; opacity: 1; }
+
+        .portal-overlay.active {
+            visibility: visible; opacity: 1;
+        }
 
         .portal-card {
-            width: 100%; max-width: 1180px;
-            height: 88vh; max-height: 960px;
-            background: var(--terminal-bg);
-            border: 1px solid rgba(0, 234, 255, 0.18);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 0 60px rgba(0, 234, 255, 0.12);
+            width: 100%; max-width: 1140px;
+            height: 88vh; max-height: 920px;
+            background: var(--card-bg);
+            backdrop-filter: blur(18px);
+            border-radius: 28px;
+            border: 1px solid var(--soft-border);
+            box-shadow: var(--shadow-soft), var(--glow-subtle), var(--shadow-inset);
             display: flex;
-            position: relative;
-            transform: scale(0.92);
+            overflow: hidden;
+            transform: scale(0.94) translateY(25px);
             opacity: 0;
-            transition: all 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.68s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .portal-overlay.active .portal-card {
-            transform: scale(1);
+            transform: scale(1) translateY(0);
             opacity: 1;
-        }
-
-        .portal-grid {
-            position: absolute; inset: 0;
-            background-image: 
-                linear-gradient(to right, var(--grid) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            opacity: 0.5;
-        }
-
-        .portal-scan {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            box-shadow: 0 0 15px var(--accent);
-            animation: scanline 7s linear infinite;
-            opacity: 0.4;
-            z-index: 1;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(2000%); }
         }
 
         .portal-sidebar {
             width: 340px;
-            background: linear-gradient(160deg, #0b1324, #121b38);
-            border-right: 1px solid rgba(0, 234, 255, 0.14);
-            padding: 50px 35px;
-            color: var(--terminal-text);
-            font-family: 'Roboto Mono', monospace;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-right: 1px solid var(--soft-border);
+            padding: 55px 40px;
             display: flex; flex-direction: column; justify-content: space-between;
-            position: relative;
-            z-index: 2;
         }
 
         .portal-sidebar .name {
-            font-size: 1.65rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(0,234,255,0.4);
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
         }
 
         .portal-sidebar .role {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 6px;
+            font-size: 0.92rem;
+            color: var(--light-text);
+            margin-top: 10px;
+            font-weight: 500;
         }
 
         .portal-close {
-            width: 52px;
-            height: 52px;
-            background: rgba(0,234,255,0.08);
-            border: 1px solid rgba(0,234,255,0.25);
+            width: 54px;
+            height: 54px;
+            background: rgba(37,99,235,0.06);
+            border: 1px solid rgba(37,99,235,0.18);
             border-radius: 50%;
-            color: var(--accent);
-            font-size: 1.9rem;
+            color: var(--primary);
+            font-size: 2.1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.22s ease;
             align-self: flex-end;
         }
 
         .portal-close:hover {
-            background: rgba(0,234,255,0.18);
-            box-shadow: 0 0 20px rgba(0,234,255,0.3);
+            background: rgba(37,99,235,0.14);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.12);
         }
 
         .portal-content {
             flex: 1;
-            padding: 60px 70px;
+            padding: 65px 75px;
             overflow-y: auto;
-            color: var(--terminal-text);
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            position: relative;
-            z-index: 2;
+            background: linear-gradient(to bottom, #ffffff 0%, #fdfefe 100%);
         }
 
         .portal-header {
-            font-size: 2.4rem;
+            font-size: 2.55rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 38px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: -0.7px;
+        }
+
+        .portal-header::after {
+            content: '';
+            position: absolute;
+            bottom: -14px; left: 0;
+            width: 110px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .portal-text {
+            font-size: 1.1rem;
+            line-height: 1.88;
+            color: var(--light-text);
+        }
+
+        .portal-text strong, .portal-text b {
+            color: var(--dark);
             font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 40px;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 12px rgba(0,234,255,0.5);
         }
 
         .portal-text h3 {
-            color: #a5eeff;
-            font-size: 1.4rem;
-            margin: 45px 0 18px;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(0,234,255,0.2);
-            padding-bottom: 10px;
-        }
-
-        .portal-text p, .portal-text li {
-            margin-bottom: 1.1rem;
-        }
-
-        .portal-text strong {
-            color: #ffffff;
-            font-weight: 500;
+            color: var(--primary);
+            font-size: 1.48rem;
+            font-weight: 800;
+            margin: 44px 0 18px;
         }
 
         .portal-text ul {
             list-style: none;
             padding-left: 0;
-            margin: 1.5rem 0;
+            margin: 1.6rem 0;
         }
 
         .portal-text ul li {
             position: relative;
-            padding-left: 2.2rem;
-            margin-bottom: 1rem;
+            padding-left: 32px;
+            margin-bottom: 1.15rem;
         }
 
         .portal-text ul li::before {
             content: "→";
             position: absolute;
             left: 0;
-            color: var(--accent-dim);
+            color: var(--primary);
             font-weight: bold;
+            font-size: 1.3rem;
+            line-height: 1.4;
         }
 
         .portal-text .achievement {
-            background: rgba(0,234,255,0.06);
-            border-left: 4px solid var(--accent);
-            padding: 20px 24px;
-            margin: 2rem 0;
-            border-radius: 6px;
-            font-style: italic;
+            background: rgba(37,99,235,0.04);
+            border-left: 5px solid var(--primary);
+            padding: 22px 28px;
+            margin: 2.2rem 0;
+            border-radius: 8px;
+            font-style: normal;
+            color: #1e40af;
         }
 
         @media (max-width: 768px) {
-            .portal-card { flex-direction: column; height: 94vh; }
-            .portal-sidebar { width: 100%; height: auto; padding: 30px 25px; flex-direction: row; justify-content: space-between; align-items: center; }
-            .portal-close { width: 48px; height: 48px; font-size: 1.8rem; }
-            .portal-content { padding: 45px 30px; }
-            .portal-header { font-size: 2rem; }
+            .portal-card { flex-direction: column; height: 92vh; }
+            .portal-sidebar {
+                width: 100%; height: auto;
+                padding: 32px 28px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .portal-close {
+                width: 50px;
+                height: 50px;
+                font-size: 1.9rem;
+            }
+            .portal-content { padding: 48px 32px; }
+            .portal-header { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -392,8 +389,6 @@
 
     <div id="portal" class="portal-overlay">
         <div class="portal-card">
-            <div class="portal-grid"></div>
-            <div class="portal-scan"></div>
             <div class="portal-sidebar">
                 <div>
                     <div class="name">ALAGU RAGUL</div>
