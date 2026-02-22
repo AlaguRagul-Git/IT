@@ -132,7 +132,7 @@
         li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 0.95rem; line-height: 1.6; }
         li::before { content: "•"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
 
-        /* BLACK BUTTONS */
+        /* BLACK FOOTER BUTTONS */
         .footer-actions { text-align: center; margin: 80px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .btn-download-black {
             padding: 14px 28px;
@@ -151,41 +151,81 @@
         }
         .btn-download-black:hover { background: #333; transform: translateY(-3px); }
 
-        /* FAB SYSTEM */
+        /* FLOATING ACTION MENU */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
-        .fab-main { width: 60px; height: 60px; background: #000; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .fab-main { width: 60px; height: 60px; background: #000; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); transition: 0.4s; }
         .fab-list { display: none; flex-direction: column; gap: 10px; align-items: flex-end; }
-        .fab-list.show { display: flex; }
-        .fab-item { background: white; color: #000; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; border: 1px solid #000; cursor: pointer; white-space: nowrap; transition: 0.2s; }
-        .fab-item:hover { background: #000; color: #fff; }
+        .fab-list.show { display: flex; animation: slideUp 0.3s forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fab-item { background: white; color: black; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; border: 2px solid black; cursor: pointer; transition: 0.3s; box-shadow: 4px 4px 0px black; }
+        .fab-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--primary); color: var(--primary); }
 
-        /* UNIQUE SPLIT-PANEL SLIDE STYLE */
-        .unique-slide {
-            position: fixed; top: 0; right: -100%;
-            width: 100%; height: 100%;
+        /* ULTRA UNIQUE PORTAL SLIDE */
+        .portal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 10000;
-            transition: 0.6s cubic-bezier(0.7, 0, 0.3, 1);
-            display: flex;
+            visibility: hidden; opacity: 0;
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex; align-items: center; justify-content: center;
         }
-        .unique-slide.active { right: 0; }
-        .slide-left { width: 30%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; padding: 40px; color: #fff; border-right: 1px solid #333; }
-        .slide-right { width: 70%; height: 100%; background: #fff; padding: 60px; overflow-y: auto; color: #333; position: relative; }
-        .slide-close { position: absolute; top: 30px; right: 30px; font-size: 40px; cursor: pointer; color: #000; }
+        .portal-overlay.active { visibility: visible; opacity: 1; }
         
-        .slide-right h2 { font-size: 2.5rem; margin-bottom: 20px; border-bottom: 4px solid #000; display: inline-block; padding-bottom: 10px; }
-        .slide-right p, .slide-right li { font-size: 1.1rem; line-height: 1.8; margin-bottom: 10px; }
-        .slide-right ul { list-style: disc; padding-left: 20px; }
+        .portal-card {
+            width: 90%; max-width: 1000px; height: 85vh;
+            background: #fff; border-radius: 30px;
+            display: flex; overflow: hidden;
+            transform: scale(0.8) translateY(50px);
+            transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 50px rgba(37,99,235,0.3);
+        }
+        .portal-overlay.active .portal-card { transform: scale(1) translateY(0); }
+
+        .portal-sidebar { width: 250px; background: #000; color: #fff; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; }
+        .portal-content { flex: 1; padding: 60px; overflow-y: auto; color: #1e293b; background: #fff; }
+        .portal-close { font-size: 35px; cursor: pointer; color: #94a3b8; align-self: flex-end; transition: 0.3s; }
+        .portal-close:hover { color: #f43f5e; transform: rotate(90deg); }
+
+        .portal-header { font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; color: #000; border-left: 8px solid var(--primary); padding-left: 20px; }
+        .portal-body h3 { font-size: 1.3rem; margin-top: 25px; color: var(--primary); }
+        .portal-body p, .portal-body li { line-height: 1.8; font-size: 1.1rem; margin-bottom: 12px; }
+        .portal-body b { color: #000; }
+        .portal-body ul { list-style: disc; padding-left: 20px; margin-top: 10px; }
 
         @media (max-width: 768px) {
-            .slide-left { display: none; }
-            .slide-right { width: 100%; padding: 40px 20px; }
-            .cyber-name { font-size: 2.5rem; }
+            .portal-card { flex-direction: column; height: 95vh; }
+            .portal-sidebar { width: 100%; height: 80px; padding: 15px 30px; flex-direction: row; align-items: center; }
+            .portal-content { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
     <canvas id="canvas-web" class="no-print"></canvas>
+
+    <div class="fab-container no-print">
+        <button class="fab-main" onclick="toggleFab()"><i class="fas fa-expand-arrows-alt"></i></button>
+        <div class="fab-list" id="fabList">
+            <div class="fab-item" onclick="openPortal('about')">About Me</div>
+            <div class="fab-item" onclick="openPortal('edu')">Education & Skills</div>
+            <div class="fab-item" onclick="openPortal('exp')">Full Experience</div>
+            <div class="fab-item" onclick="openPortal('hobbies')">Interests</div>
+            <div class="fab-item" onclick="openPortal('life')">Philosophy</div>
+        </div>
+    </div>
+
+    <div id="portal" class="portal-overlay">
+        <div class="portal-card">
+            <div class="portal-sidebar">
+                <div style="font-weight: 900; font-size: 1.2rem; letter-spacing: 2px;">ALAGU<br>RAGUL</div>
+                <div style="writing-mode: vertical-rl; text-transform: uppercase; font-size: 3rem; opacity: 0.1; font-weight: 900;">PORTFOLIO</div>
+                <div class="portal-close" onclick="closePortal()">&times;</div>
+            </div>
+            <div class="portal-content">
+                <h2 id="portal-title" class="portal-header"></h2>
+                <div id="portal-body" class="portal-body"></div>
+            </div>
+        </div>
+    </div>
 
     <nav>
         <div class="container">
@@ -200,27 +240,6 @@
             </div>
         </div>
     </nav>
-
-    <div class="fab-container no-print">
-        <button class="fab-main" onclick="toggleFab()"><i class="fas fa-bars"></i></button>
-        <div class="fab-list" id="fabList">
-            <div class="fab-item" onclick="openSlide('about')">About Me</div>
-            <div class="fab-item" onclick="openSlide('edu')">Education</div>
-            <div class="fab-item" onclick="openSlide('exp')">Full Experience</div>
-            <div class="fab-item" onclick="openSlide('hobbies')">Interests</div>
-            <div class="fab-item" onclick="openSlide('life')">Philosophy</div>
-        </div>
-    </div>
-
-    <div id="slide-overlay" class="unique-slide">
-        <div class="slide-left">
-            <h1 id="slide-left-title" style="transform: rotate(-90deg); font-size: 4rem; opacity: 0.2; white-space: nowrap;">PORTFOLIO</h1>
-        </div>
-        <div class="slide-right">
-            <span class="slide-close" onclick="closeSlide()">&times;</span>
-            <div id="slide-body"></div>
-        </div>
-    </div>
 
     <div class="container">
         <header>
@@ -259,11 +278,9 @@
                 <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL EXPERIENCE</h2>
                 <h3 style="color:var(--primary); font-size: 1.3rem;">IT Support Engineer</h3>
                 <p><strong>Ahluwalia Contracts (India) Ltd. – Mumbai</strong> | April 2024 – Present</p>
-
                 <div class="achievement-box">
                     <strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.
                 </div>
-
                 <ul>
                     <li>Act as first point of contact for IT support, resolving L1/L2 incidents related to hardware, Windows OS, applications, email, and network connectivity.</li>
                     <li>Handle high-volume service requests and incidents via email and service desk tools while consistently meeting SLA targets.</li>
@@ -291,60 +308,67 @@
             </div>
         </section>
 
-        <section class="glow-card">
-            <div class="card-content">
-                <h2 style="margin-bottom:10px; font-weight:900; color: var(--dark);">CERTIFICATIONS</h2>
-                <p>CCNA – Networking Fundamentals</p>
-                <h2 style="margin: 20px 0 10px; font-weight:900; color: var(--dark);">ADDITIONAL INFORMATION</h2>
-                <p>Languages: English, Tamil, Hindi | Notice Period: 30 Days</p>
-            </div>
-        </section>
-
         <div class="footer-actions no-print">
-            <a href="Alagu Ragul IT Support Engineer Resume.pdf" download class="btn-download-black">Download Resume</a>
-            <a href="Alagu_Ragul_M_IT_Support_Cover_Letter.pdf" download class="btn-download-black">Download Cover Letter</a>
+            <a href="#" class="btn-download-black">Download Resume</a>
+            <a href="#" class="btn-download-black">Download Cover Letter</a>
         </div>
-
-        <footer style="text-align:center; padding-bottom:40px; color:#94a3b8; font-size:0.8rem;">
-            © 2026 ALAGU RAGUL M | IT Support Portfolio
-        </footer>
     </div>
 
     <script>
-        const slideData = {
-            about: `<h2>About Me</h2><p>I am Alagu Ragul, born in Vadakarai, Tenkasi District. I am a dedicated IT professional with a background in BCA and an MBA in Financial Management. My journey into technology began with a passion for problem-solving and has evolved into a career in IT infrastructure and support.</p>`,
-            edu: `<h2>Education & Certifications</h2><p><strong>MBA - Financial Management</strong><br>Alagappa University | CGPA: 7.0</p><p><strong>BCA</strong><br>Kalasalingam Academy | CGPA: 6.83</p><p><strong>CCNA</strong><br>Certified in Networking Fundamentals.</p>`,
-            exp: `<h2>Professional Experience</h2>
-                  <p><strong>IT Support Engineer</strong><br>Ahluwalia Contracts (India) Ltd. – Mumbai | April 2024 – Present</p>
-                  <p style="background:#f9f9f9; padding:15px; border-left: 4px solid #000;"><strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.</p>
-                  <ul>
-                    <li>Act as first point of contact for IT support, resolving L1/L2 incidents related to hardware, Windows OS, applications, email, and network connectivity.</li>
-                    <li>Handle high-volume service requests and incidents via email and service desk tools while consistently meeting SLA targets.</li>
-                    <li>Install, configure, and troubleshoot Windows 10/11 systems, MS Office, Outlook, and end-user applications.</li>
-                    <li>Manage Active Directory tasks including user creation, password resets, access permissions, and basic group management.</li>
-                    <li>Diagnose and resolve LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity issues to minimize user downtime.</li>
-                    <li>Provide remote and onsite support using AnyDesk, TeamViewer, and Remote Desktop.</li>
-                    <li>Support enterprise email platforms including Zimbra and Exchange (basic troubleshooting).</li>
-                    <li>Perform endpoint security tasks such as antivirus monitoring, patch updates, and system health checks.</li>
-                    <li>Coordinate with vendors, OEMs, and ISPs for hardware replacements, warranty claims, and network escalations.</li>
-                    <li>Assist in root cause analysis (RCA) for recurring issues and document permanent fixes.</li>
-                    <li>Maintain IT asset records, SOPs, technical documentation, and knowledge base articles.</li>
-                    <li>Support employee onboarding and offboarding by provisioning system access and configuring devices.</li>
-                  </ul>`,
-            hobbies: `<h2>Interests & Exploration</h2><p>I am an explorer at heart. Whether it's troubleshooting a complex server issue or exploring new tech stacks, I enjoy the process of learning. I also have a keen interest in how financial management integrates with technical operations.</p>`,
-            life: `<h2>Life Philosophy</h2><p>I believe in "Continuous Growth." In the fast-paced world of IT, staying stagnant is not an option. My approach to work is defined by resilience, curiosity, and a commitment to helping users overcome technical barriers efficiently.</p>`
+        const portalData = {
+            about: {
+                title: "About Me",
+                body: `<p>I am <b>Alagu Ragul</b>, an IT professional based in Mumbai, originally from <b>Vadakarai, Tenkasi</b>. My career is built on the foundation of technical curiosity and a deep commitment to excellence in IT operations.</p>
+                       <p>With a blend of technical (BCA) and management (MBA) education, I bridge the gap between technical execution and organizational strategy.</p>`
+            },
+            edu: {
+                title: "Education & Certifications",
+                body: `<p><b>Master of Business Administration (MBA)</b><br>Alagappa University | CGPA: 7.0<br>Specialized in Financial Management to understand the business side of IT operations.</p>
+                       <p><b>Bachelor of Computer Applications (BCA)</b><br>Kalasalingam Academy | CGPA: 6.83</p>
+                       <p><b>CCNA Certified</b><br>Proficient in LAN/WAN, Switching, and Routing fundamentals.</p>`
+            },
+            exp: {
+                title: "Full Professional Experience",
+                body: `<h3>IT Support Engineer</h3>
+                       <p><b>Ahluwalia Contracts (India) Ltd. – Mumbai</b> | April 2024 – Present</p>
+                       <p style="background:#f1f5f9; padding:15px; border-left:4px solid black;"><b>Key Achievement:</b> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.</p>
+                       <ul>
+                            <li><b>Incident Management:</b> First point of contact for L1/L2 hardware, Windows OS, applications, and network issues.</li>
+                            <li><b>Service Desk:</b> Handle high-volume ticket queues via email and tools within strict SLA targets.</li>
+                            <li><b>OS & Software:</b> Expert in installing and troubleshooting Windows 10/11, MS Office, and Outlook.</li>
+                            <li><b>Identity Management:</b> Managing Active Directory (User creation, password resets, permissions).</li>
+                            <li><b>Network Support:</b> Diagnosing LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity.</li>
+                            <li><b>Remote Tools:</b> Skilled in AnyDesk, TeamViewer, and Remote Desktop support.</li>
+                            <li><b>Enterprise Mail:</b> Troubleshooting Zimbra and Microsoft Exchange environments.</li>
+                            <li><b>Security:</b> Monitoring antivirus status, deploying patches, and health checks.</li>
+                            <li><b>Vendor Liaison:</b> Coordinating with ISPs and OEMs for hardware/internet escalations.</li>
+                            <li><b>Documentation:</b> Creating SOPs and maintaining detailed IT asset records.</li>
+                            <li><b>HR Support:</b> Managing IT onboarding/offboarding for new employees.</li>
+                       </ul>`
+            },
+            hobbies: {
+                title: "Hobbies & Interests",
+                body: `<p><b>Tech Exploration:</b> Constantly testing new software and system optimization tools.</p>
+                       <p><b>Travel:</b> Exploring natural landscapes which offers a fresh perspective on problem-solving.</p>
+                       <p><b>Hardware Modding:</b> Deep interest in system builds and hardware architecture.</p>`
+            },
+            life: {
+                title: "Life Philosophy",
+                body: `<p>I believe in <b>"Relentless Troubleshooting."</b> No technical issue is unsolvable; it only requires the right approach and continuous learning. My professional goal is to ensure zero downtime for the people I support.</p>`
+            }
         };
 
         function toggleFab() { document.getElementById('fabList').classList.toggle('show'); }
-        function openSlide(id) {
-            document.getElementById('slide-body').innerHTML = slideData[id];
-            document.getElementById('slide-left-title').innerText = id.toUpperCase();
-            document.getElementById('slide-overlay').classList.add('active');
+        function openPortal(key) {
+            const data = portalData[key];
+            document.getElementById('portal-title').innerText = data.title;
+            document.getElementById('portal-body').innerHTML = data.body;
+            document.getElementById('portal').classList.add('active');
             toggleFab();
         }
-        function closeSlide() { document.getElementById('slide-overlay').classList.remove('active'); }
+        function closePortal() { document.getElementById('portal').classList.remove('active'); }
 
-        // SPIDER WEB ENGINE
+        // CANVAS WEB
         const canvas = document.getElementById('canvas-web');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -381,7 +405,6 @@
             requestAnimationFrame(loop);
         }
         function toggleMenu() { document.getElementById("hireMenu").classList.toggle("show"); }
-        window.onclick = function(e) { if (!e.target.closest('.btn-hire')) { var m = document.getElementById("hireMenu"); if (m && m.classList.contains('show')) m.classList.remove('show'); } }
         init();
     </script>
 </body>
