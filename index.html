@@ -163,38 +163,45 @@
         /* ULTRA UNIQUE PORTAL SLIDE */
         .portal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000;
+            background: rgba(0,0,0,0.9); z-index: 10000;
             visibility: hidden; opacity: 0;
             transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px);
         }
         .portal-overlay.active { visibility: visible; opacity: 1; }
         
         .portal-card {
-            width: 90%; max-width: 1000px; height: 85vh;
-            background: #fff; border-radius: 30px;
+            width: 95%; max-width: 1100px; height: 90vh;
+            background: #fff; border-radius: 40px;
             display: flex; overflow: hidden;
-            transform: scale(0.8) translateY(50px);
-            transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 0 50px rgba(37,99,235,0.3);
+            transform: translateY(100%);
+            transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .portal-overlay.active .portal-card { transform: scale(1) translateY(0); }
+        .portal-overlay.active .portal-card { transform: translateY(0); }
 
-        .portal-sidebar { width: 250px; background: #000; color: #fff; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; }
-        .portal-content { flex: 1; padding: 60px; overflow-y: auto; color: #1e293b; background: #fff; }
-        .portal-close { font-size: 35px; cursor: pointer; color: #94a3b8; align-self: flex-end; transition: 0.3s; }
-        .portal-close:hover { color: #f43f5e; transform: rotate(90deg); }
+        .portal-sidebar { width: 300px; background: #000; color: #fff; padding: 50px; display: flex; flex-direction: column; justify-content: space-between; position: relative;}
+        .portal-sidebar::after { content:''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: rgba(255,255,255,0.2); }
+        
+        .portal-content { flex: 1; padding: 60px; overflow-y: auto; color: #1e293b; background: #fff; scroll-behavior: smooth; }
+        .portal-close { font-size: 35px; cursor: pointer; color: #fff; transition: 0.3s; background: rgba(255,255,255,0.1); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .portal-close:hover { background: #f43f5e; transform: rotate(90deg); }
 
-        .portal-header { font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; color: #000; border-left: 8px solid var(--primary); padding-left: 20px; }
-        .portal-body h3 { font-size: 1.3rem; margin-top: 25px; color: var(--primary); }
-        .portal-body p, .portal-body li { line-height: 1.8; font-size: 1.1rem; margin-bottom: 12px; }
+        .portal-header { font-size: 3rem; font-weight: 900; margin-bottom: 30px; color: #000; line-height: 1; }
+        .portal-body { font-size: 1.15rem; line-height: 1.8; color: #475569; }
+        .portal-body h3 { font-size: 1.4rem; color: #000; margin: 30px 0 15px; border-bottom: 2px solid var(--primary); display: inline-block;}
         .portal-body b { color: #000; }
-        .portal-body ul { list-style: disc; padding-left: 20px; margin-top: 10px; }
+        .portal-body ul { margin-top: 15px; }
+        .portal-body li { margin-bottom: 12px; padding-left: 25px; position: relative; }
+        .portal-body li::before { content: '→'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+
+        .tag-info { display: inline-block; background: #f1f5f9; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-transform: uppercase;}
 
         @media (max-width: 768px) {
-            .portal-card { flex-direction: column; height: 95vh; }
-            .portal-sidebar { width: 100%; height: 80px; padding: 15px 30px; flex-direction: row; align-items: center; }
+            .portal-card { flex-direction: column; border-radius: 0; height: 100vh; width: 100%; }
+            .portal-sidebar { width: 100%; height: auto; padding: 25px; flex-direction: row; align-items: center; }
             .portal-content { padding: 30px; }
+            .portal-header { font-size: 2rem; }
         }
     </style>
 </head>
@@ -203,11 +210,11 @@
     <canvas id="canvas-web" class="no-print"></canvas>
 
     <div class="fab-container no-print">
-        <button class="fab-main" onclick="toggleFab()"><i class="fas fa-expand-arrows-alt"></i></button>
+        <button class="fab-main" onclick="toggleFab()"><i class="fas fa-plus"></i></button>
         <div class="fab-list" id="fabList">
-            <div class="fab-item" onclick="openPortal('about')">About Me</div>
-            <div class="fab-item" onclick="openPortal('edu')">Education & Skills</div>
-            <div class="fab-item" onclick="openPortal('exp')">Full Experience</div>
+            <div class="fab-item" onclick="openPortal('about')">Identity</div>
+            <div class="fab-item" onclick="openPortal('edu')">Academics</div>
+            <div class="fab-item" onclick="openPortal('exp')">Career Depth</div>
             <div class="fab-item" onclick="openPortal('hobbies')">Interests</div>
             <div class="fab-item" onclick="openPortal('life')">Philosophy</div>
         </div>
@@ -216,11 +223,14 @@
     <div id="portal" class="portal-overlay">
         <div class="portal-card">
             <div class="portal-sidebar">
-                <div style="font-weight: 900; font-size: 1.2rem; letter-spacing: 2px;">ALAGU<br>RAGUL</div>
-                <div style="writing-mode: vertical-rl; text-transform: uppercase; font-size: 3rem; opacity: 0.1; font-weight: 900;">PORTFOLIO</div>
+                <div>
+                    <div style="font-weight: 900; font-size: 1.5rem; color: var(--primary); margin-bottom: 5px;">A.R.M</div>
+                    <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.6;">Profile Deep-Dive</div>
+                </div>
                 <div class="portal-close" onclick="closePortal()">&times;</div>
             </div>
             <div class="portal-content">
+                <div class="tag-info" id="portal-tag">Section Detail</div>
                 <h2 id="portal-title" class="portal-header"></h2>
                 <div id="portal-body" class="portal-body"></div>
             </div>
@@ -317,95 +327,43 @@
     <script>
         const portalData = {
             about: {
+                tag: "Personal Profile",
                 title: "About Me",
-                body: `<p>I am <b>Alagu Ragul</b>, an IT professional based in Mumbai, originally from <b>Vadakarai, Tenkasi</b>. My career is built on the foundation of technical curiosity and a deep commitment to excellence in IT operations.</p>
-                       <p>With a blend of technical (BCA) and management (MBA) education, I bridge the gap between technical execution and organizational strategy.</p>`
+                body: `<p>Hello, I am <b>Alagu Ragul</b>.</p>
+                       <p>I was born on <b>09-04-2001</b> in Vadakarai, Tenkasi District, Tamil Nadu, India. I completed my school education up to 10th grade in government schools in my native place. After that, I completed 11th and 12th grade at <b>S.N.R Higher Secondary School</b>, Sankarankovil.</p>
+                       <p>Following my higher secondary education, I pursued my undergraduate degree in <b>Bachelor of Computer Applications (BCA)</b> at Kalasalingam Academy of Research and Education (Deemed University), Anand Nagar, Krishnankoil, Tamil Nadu.</p>
+                       <p>In 2021–2022, I focused on preparing for government examinations to expand my career opportunities. During this period, I also enrolled in a <b>CCNA course</b> at Sansbound Network School, West Mambalam, Chennai, where I gained hands-on knowledge in networking fundamentals.</p>
+                       <p>Later, I pursued a <b>Master of Business Administration (MBA)</b> in Financial Management through distance education at Alagappa University, Karaikudi, Tamil Nadu (2022–2024).</p>
+                       <p>Since April 2024, I have been working professionally as an <b>IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai</b>, where I support enterprise IT operations and contribute to smooth organizational IT workflows.</p>`
             },
             edu: {
+                tag: "Academic Background",
                 title: "Education & Certifications",
-                body: `<p><b>Master of Business Administration (MBA)</b><br>Alagappa University | CGPA: 7.0<br>Specialized in Financial Management to understand the business side of IT operations.</p>
-                       <p><b>Bachelor of Computer Applications (BCA)</b><br>Kalasalingam Academy | CGPA: 6.83</p>
-                       <p><b>CCNA Certified</b><br>Proficient in LAN/WAN, Switching, and Routing fundamentals.</p>`
+                body: `<h3>Schooling</h3>
+                       <ul>
+                           <li><b>Up to 10th:</b> Government Schools, Vadakarai, Tamil Nadu</li>
+                           <li><b>11th–12th:</b> S.N.R Higher Secondary School, Sankarankovil, Tamil Nadu</li>
+                       </ul>
+                       <h3>Undergraduate</h3>
+                       <p><b>Bachelor of Computer Applications (BCA)</b><br>Kalasalingam Academy of Research and Education, Anand Nagar, Krishnankoil, Tamil Nadu</p>
+                       <h3>Postgraduate (Distance Education)</h3>
+                       <p><b>Master of Business Administration (MBA) in Financial Management</b><br>Alagappa University, Karaikudi, Tamil Nadu (2022–2024)<br>University recognized by UGC.</p>
+                       <h3>Certifications</h3>
+                       <p><b>CCNA – Networking Fundamentals</b><br>Sansbound Network School, West Mambalam, Chennai</p>`
             },
             exp: {
-                title: "Full Professional Experience",
-                body: `<h3>IT Support Engineer</h3>
-                       <p><b>Ahluwalia Contracts (India) Ltd. – Mumbai</b> | April 2024 – Present</p>
-                       <p style="background:#f1f5f9; padding:15px; border-left:4px solid black;"><b>Key Achievement:</b> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.</p>
+                tag: "Work Detail",
+                title: "Professional Career",
+                body: `<p><b>Current Position:</b> IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai (April 2024 – Present)</p>
+                       <h3>Organization Details</h3>
+                       <p><b>Corporate Office:</b> Plot No. A-177, Okhla Industrial Area, Phase-I, New Delhi-110020</p>
+                       <p><b>Mumbai Regional Office:</b> 606, 6th Floor, Patatthu Business Plaza, Opposite Amar Brass Busstop, C.S.T. Road Kalina, Santacruz (E), Mumbai-400098</p>
+                       <h3>Responsibilities & Achievements</h3>
                        <ul>
-                            <li><b>Incident Management:</b> First point of contact for L1/L2 hardware, Windows OS, applications, and network issues.</li>
-                            <li><b>Service Desk:</b> Handle high-volume ticket queues via email and tools within strict SLA targets.</li>
-                            <li><b>OS & Software:</b> Expert in installing and troubleshooting Windows 10/11, MS Office, and Outlook.</li>
-                            <li><b>Identity Management:</b> Managing Active Directory (User creation, password resets, permissions).</li>
-                            <li><b>Network Support:</b> Diagnosing LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity.</li>
-                            <li><b>Remote Tools:</b> Skilled in AnyDesk, TeamViewer, and Remote Desktop support.</li>
-                            <li><b>Enterprise Mail:</b> Troubleshooting Zimbra and Microsoft Exchange environments.</li>
-                            <li><b>Security:</b> Monitoring antivirus status, deploying patches, and health checks.</li>
-                            <li><b>Vendor Liaison:</b> Coordinating with ISPs and OEMs for hardware/internet escalations.</li>
-                            <li><b>Documentation:</b> Creating SOPs and maintaining detailed IT asset records.</li>
-                            <li><b>HR Support:</b> Managing IT onboarding/offboarding for new employees.</li>
-                       </ul>`
-            },
-            hobbies: {
-                title: "Hobbies & Interests",
-                body: `<p><b>Tech Exploration:</b> Constantly testing new software and system optimization tools.</p>
-                       <p><b>Travel:</b> Exploring natural landscapes which offers a fresh perspective on problem-solving.</p>
-                       <p><b>Hardware Modding:</b> Deep interest in system builds and hardware architecture.</p>`
-            },
-            life: {
-                title: "Life Philosophy",
-                body: `<p>I believe in <b>"Relentless Troubleshooting."</b> No technical issue is unsolvable; it only requires the right approach and continuous learning. My professional goal is to ensure zero downtime for the people I support.</p>`
-            }
-        };
-
-        function toggleFab() { document.getElementById('fabList').classList.toggle('show'); }
-        function openPortal(key) {
-            const data = portalData[key];
-            document.getElementById('portal-title').innerText = data.title;
-            document.getElementById('portal-body').innerHTML = data.body;
-            document.getElementById('portal').classList.add('active');
-            toggleFab();
-        }
-        function closePortal() { document.getElementById('portal').classList.remove('active'); }
-
-        // CANVAS WEB
-        const canvas = document.getElementById('canvas-web');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const properties = { count: 80, speed: 0.5, lineLength: 150, particleColor: 'rgba(37, 99, 235, 0.2)', lineColor: 'rgba(37, 99, 235, 0.1)' };
-        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-        window.onresize();
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.velX = (Math.random() - 0.5) * properties.speed;
-                this.velY = (Math.random() - 0.5) * properties.speed;
-            }
-            update() {
-                if (this.x < 0 || this.x > canvas.width) this.velX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.velY *= -1;
-                this.x += this.velX; this.y += this.velY;
-            }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fillStyle = properties.particleColor; ctx.fill(); }
-        }
-        function init() { for (let i = 0; i < properties.count; i++) particles.push(new Particle()); loop(); }
-        function loop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i in particles) {
-                particles[i].update(); particles[i].draw();
-                for (let j in particles) {
-                    let dist = Math.sqrt(Math.pow(particles[i].x - particles[j].x, 2) + Math.pow(particles[i].y - particles[j].y, 2));
-                    if (dist < properties.lineLength) {
-                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = properties.lineColor; ctx.lineWidth = 1; ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(loop);
-        }
-        function toggleMenu() { document.getElementById("hireMenu").classList.toggle("show"); }
-        init();
-    </script>
-</body>
-</html>
+                           <li>Act as the first point of contact for IT support, resolving L1/L2 incidents related to hardware, Windows OS, applications, email, and network connectivity.</li>
+                           <li>Manage high-volume service requests and incidents via email and service desk tools, ensuring SLA compliance.</li>
+                           <li>Install, configure, and troubleshoot Windows 10/11 systems, Microsoft 365, Outlook (PST/OST), and end-user applications.</li>
+                           <li>Handle Active Directory tasks including user creation, password resets, access permissions, and basic group management.</li>
+                           <li>Diagnose and resolve LAN, Wi-Fi, VPN, DNS, and DHCP connectivity issues.</li>
+                           <li>Provide remote and onsite support using AnyDesk, TeamViewer, and Remote Desktop.</li>
+                           <li>Perform endpoint security tasks: antivirus monitoring, patch updates
