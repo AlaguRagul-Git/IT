@@ -17,6 +17,7 @@
             --shadow-soft: 0 20px 50px -15px rgba(0,0,0,0.14);
             --glow-subtle: 0 0 0 1px rgba(37,99,235,0.09), 0 0 35px rgba(37,99,235,0.06);
             --web-glow: rgba(37,99,235,0.12);
+            --particle-glow: rgba(37,99,235,0.25);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -195,7 +196,7 @@
         .fab-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--primary); color: var(--primary); }
 
         /* ────────────────────────────────
-           SUBSECTION – GLOWING SPIDER-WEB PATTERN
+           SUBSECTION – ENHANCED GLOWING SPIDER-WEB + PARTICLES
            ──────────────────────────────── */
         .portal-overlay {
             position: fixed; inset: 0;
@@ -233,16 +234,19 @@
             opacity: 1;
         }
 
-        /* Glowing spider-web moving lines */
-        .portal-web {
+        /* Animated glowing spider-web lines + particles container */
+        .portal-bg-effect {
             position: absolute;
             inset: 0;
             pointer-events: none;
             overflow: hidden;
         }
 
+        /* Web lines */
         .portal-web-line {
             position: absolute;
+            top: 50%;
+            left: 50%;
             background: linear-gradient(90deg, transparent, var(--web-glow), transparent);
             height: 1px;
             opacity: 0.35;
@@ -254,6 +258,26 @@
             0%   { transform: translate(-50%, -50%) rotate(0deg) scaleX(0.4); opacity: 0.15; }
             50%  { transform: translate(-50%, -50%) rotate(180deg) scaleX(1.1); opacity: 0.45; }
             100% { transform: translate(-50%, -50%) rotate(360deg) scaleX(0.4); opacity: 0.15; }
+        }
+
+        /* Floating particles */
+        .portal-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--particle-glow);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--particle-glow);
+            pointer-events: none;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0%   { transform: translate(0, 0); opacity: 0.2; }
+            25%  { opacity: 0.6; }
+            50%  { opacity: 0.3; }
+            75%  { opacity: 0.7; }
+            100% { transform: translate(var(--dx), var(--dy)); opacity: 0.2; }
         }
 
         .portal-sidebar {
@@ -412,12 +436,14 @@
 
     <div id="portal" class="portal-overlay">
         <div class="portal-card">
-            <div class="portal-web">
-                <!-- Animated glowing web lines -->
-                <div class="portal-web-line" style="top:50%; left:50%; width:180%; animation-duration:32s; animation-delay:0s;"></div>
-                <div class="portal-web-line" style="top:50%; left:50%; width:160%; animation-duration:38s; animation-delay:4s;"></div>
-                <div class="portal-web-line" style="top:50%; left:50%; width:200%; animation-duration:45s; animation-delay:9s;"></div>
-                <div class="portal-web-line" style="top:50%; left:50%; width:140%; animation-duration:52s; animation-delay:14s;"></div>
+            <div class="portal-bg-effect">
+                <!-- Glowing spider-web lines -->
+                <div class="portal-web-line" style="width:180%; animation-duration:34s; animation-delay:0s;"></div>
+                <div class="portal-web-line" style="width:160%; animation-duration:40s; animation-delay:6s;"></div>
+                <div class="portal-web-line" style="width:200%; animation-duration:48s; animation-delay:12s;"></div>
+                <div class="portal-web-line" style="width:140%; animation-duration:56s; animation-delay:18s;"></div>
+
+                <!-- Floating particles (randomized via JS) -->
             </div>
 
             <div class="portal-sidebar">
@@ -597,10 +623,55 @@
             document.getElementById('portal-body').innerHTML = data.body;
             document.getElementById('portal').classList.add('active');
             document.getElementById('fabList').classList.remove('show');
+
+            // Generate particles when portal opens
+            createParticles();
         }
 
         function closePortal() {
             document.getElementById('portal').classList.remove('active');
+            // Optional: clean up particles if needed
+            const particles = document.querySelectorAll('.portal-particle');
+            particles.forEach(p => p.remove());
+        }
+
+        function createParticles() {
+            const container = document.querySelector('.portal-bg-effect');
+            // Remove old particles if any
+            const old = document.querySelectorAll('.portal-particle');
+            old.forEach(p => p.remove());
+
+            for (let i = 0; i < 28; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'portal-particle';
+
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                particle.style.left = x + '%';
+                particle.style.top  = y + '%';
+
+                // Random size & animation duration
+                const size = 2 + Math.random() * 4;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+
+                const duration = 25 + Math.random() * 35;
+                particle.style.animationDuration = duration + 's';
+
+                // Random direction & distance
+                const angle = Math.random() * 360;
+                const distance = 80 + Math.random() * 120;
+                const dx = Math.cos(angle * Math.PI / 180) * distance + '%';
+                const dy = Math.sin(angle * Math.PI / 180) * distance + '%';
+                particle.style.setProperty('--dx', dx);
+                particle.style.setProperty('--dy', dy);
+
+                // Random delay
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+
+                container.appendChild(particle);
+            }
         }
 
         const canvas = document.getElementById('canvas-web');
