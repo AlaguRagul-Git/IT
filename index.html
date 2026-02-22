@@ -12,11 +12,11 @@
             --text: #334155;
             --light-text: #475569;
             --bg: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-bg: rgba(255, 255, 255, 0.94);
             --soft-border: #e2e8f0;
             --shadow-soft: 0 20px 50px -15px rgba(0,0,0,0.14);
-            --shadow-inset: inset 0 2px 10px rgba(0,0,0,0.04);
-            --glow-subtle: 0 0 0 1px rgba(37,99,235,0.08), 0 0 30px rgba(37,99,235,0.05);
+            --glow-subtle: 0 0 0 1px rgba(37,99,235,0.09), 0 0 35px rgba(37,99,235,0.06);
+            --web-glow: rgba(37,99,235,0.12);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -195,16 +195,15 @@
         .fab-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--primary); color: var(--primary); }
 
         /* ────────────────────────────────
-           NEW UNIQUE SUBSECTION STYLE
-           Clean • Elegant • Premium • Subtle depth
+           SUBSECTION – GLOWING SPIDER-WEB PATTERN
            ──────────────────────────────── */
         .portal-overlay {
             position: fixed; inset: 0;
-            background: rgba(15, 23, 42, 0.55);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(12px);
             z-index: 10000;
             visibility: hidden; opacity: 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.55s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex; align-items: center; justify-content: center;
             padding: 25px;
         }
@@ -217,15 +216,16 @@
             width: 100%; max-width: 1140px;
             height: 88vh; max-height: 920px;
             background: var(--card-bg);
-            backdrop-filter: blur(18px);
+            backdrop-filter: blur(20px);
             border-radius: 28px;
             border: 1px solid var(--soft-border);
-            box-shadow: var(--shadow-soft), var(--glow-subtle), var(--shadow-inset);
+            box-shadow: var(--shadow-soft), var(--glow-subtle);
             display: flex;
             overflow: hidden;
+            position: relative;
             transform: scale(0.94) translateY(25px);
             opacity: 0;
-            transition: all 0.68s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .portal-overlay.active .portal-card {
@@ -233,12 +233,37 @@
             opacity: 1;
         }
 
+        /* Glowing spider-web moving lines */
+        .portal-web {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .portal-web-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--web-glow), transparent);
+            height: 1px;
+            opacity: 0.35;
+            animation: webMove linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes webMove {
+            0%   { transform: translate(-50%, -50%) rotate(0deg) scaleX(0.4); opacity: 0.15; }
+            50%  { transform: translate(-50%, -50%) rotate(180deg) scaleX(1.1); opacity: 0.45; }
+            100% { transform: translate(-50%, -50%) rotate(360deg) scaleX(0.4); opacity: 0.15; }
+        }
+
         .portal-sidebar {
             width: 340px;
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(145deg, #ffffff 0%, #f9fbff 100%);
             border-right: 1px solid var(--soft-border);
             padding: 55px 40px;
             display: flex; flex-direction: column; justify-content: space-between;
+            position: relative;
+            z-index: 2;
         }
 
         .portal-sidebar .name {
@@ -246,7 +271,6 @@
             font-weight: 900;
             color: var(--dark);
             letter-spacing: -0.5px;
-            line-height: 1.1;
         }
 
         .portal-sidebar .role {
@@ -259,7 +283,7 @@
         .portal-close {
             width: 54px;
             height: 54px;
-            background: rgba(37,99,235,0.06);
+            background: rgba(37,99,235,0.07);
             border: 1px solid rgba(37,99,235,0.18);
             border-radius: 50%;
             color: var(--primary);
@@ -273,16 +297,18 @@
         }
 
         .portal-close:hover {
-            background: rgba(37,99,235,0.14);
+            background: rgba(37,99,235,0.15);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37,99,235,0.12);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.14);
         }
 
         .portal-content {
             flex: 1;
             padding: 65px 75px;
             overflow-y: auto;
-            background: linear-gradient(to bottom, #ffffff 0%, #fdfefe 100%);
+            background: transparent;
+            position: relative;
+            z-index: 2;
         }
 
         .portal-header {
@@ -292,7 +318,6 @@
             margin-bottom: 38px;
             position: relative;
             display: inline-block;
-            letter-spacing: -0.7px;
         }
 
         .portal-header::after {
@@ -342,7 +367,6 @@
             color: var(--primary);
             font-weight: bold;
             font-size: 1.3rem;
-            line-height: 1.4;
         }
 
         .portal-text .achievement {
@@ -351,7 +375,6 @@
             padding: 22px 28px;
             margin: 2.2rem 0;
             border-radius: 8px;
-            font-style: normal;
             color: #1e40af;
         }
 
@@ -389,6 +412,14 @@
 
     <div id="portal" class="portal-overlay">
         <div class="portal-card">
+            <div class="portal-web">
+                <!-- Animated glowing web lines -->
+                <div class="portal-web-line" style="top:50%; left:50%; width:180%; animation-duration:32s; animation-delay:0s;"></div>
+                <div class="portal-web-line" style="top:50%; left:50%; width:160%; animation-duration:38s; animation-delay:4s;"></div>
+                <div class="portal-web-line" style="top:50%; left:50%; width:200%; animation-duration:45s; animation-delay:9s;"></div>
+                <div class="portal-web-line" style="top:50%; left:50%; width:140%; animation-duration:52s; animation-delay:14s;"></div>
+            </div>
+
             <div class="portal-sidebar">
                 <div>
                     <div class="name">ALAGU RAGUL</div>
@@ -396,6 +427,7 @@
                 </div>
                 <div class="portal-close" onclick="closePortal()">×</div>
             </div>
+
             <div class="portal-content">
                 <h2 id="portal-title" class="portal-header"></h2>
                 <div id="portal-body" class="portal-text"></div>
