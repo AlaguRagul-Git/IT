@@ -16,7 +16,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         @media print {
-            nav, .no-print, .footer-actions, #canvas-web, .vibe-dock { display: none !important; }
+            nav, .no-print, .footer-actions, #canvas-web, .fab-container { display: none !important; }
             body { background: white !important; }
             .glow-card { border: 1px solid #ccc !important; box-shadow: none !important; }
             .glow-card::before { display: none !important; }
@@ -44,7 +44,7 @@
             backdrop-filter: blur(12px);
             position: sticky; 
             top: 0; 
-            z-index: 9999;
+            z-index: 999;
             border-bottom: 1px solid #e2e8f0;
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; }
@@ -132,9 +132,8 @@
         li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 0.95rem; line-height: 1.6; }
         li::before { content: "•"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
 
+        /* BLACK FOOTER BUTTONS */
         .footer-actions { text-align: center; margin: 80px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        
-        /* BLACK BUTTON STYLING */
         .btn-download-black {
             padding: 14px 28px;
             font-size: 16px;
@@ -150,88 +149,80 @@
             transition: all 0.3s ease;
             border: none;
         }
-        .btn-download-black:hover {
-            background: #333333;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
+        .btn-download-black:hover { background: #333; transform: translateY(-3px); }
 
-        @media (max-width: 768px) { .cyber-name { font-size: 2.5rem; } }
+        /* FLOATING ACTION MENU */
+        .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
+        .fab-main { width: 60px; height: 60px; background: #000; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); transition: 0.4s; }
+        .fab-list { display: none; flex-direction: column; gap: 10px; align-items: flex-end; }
+        .fab-list.show { display: flex; animation: slideUp 0.3s forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fab-item { background: white; color: black; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; border: 2px solid black; cursor: pointer; transition: 0.3s; box-shadow: 4px 4px 0px black; }
+        .fab-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--primary); color: var(--primary); }
 
-        /* --- UNIQUE SUBSECTION: THE ONE BUTTON --- */
-        .vibe-dock {
-            position: fixed; bottom: 30px; right: 30px;
-            z-index: 1000;
-        }
-        .vibe-btn {
-            background: #000; color: white; border: 2px solid var(--primary);
-            padding: 15px 30px; border-radius: 50px; font-weight: 900;
-            cursor: pointer; box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
-            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .vibe-btn:hover {
-            animation: vibe-shake 0.1s infinite;
-            background: var(--primary);
-        }
-        @keyframes vibe-shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            50% { transform: translate(-1px, -1px) rotate(1deg); }
-            100% { transform: translate(1px, -1px) rotate(-1deg); }
-        }
-
-        /* --- KINETIC PORTAL FOR UNIQUE CONTENT --- */
-        .kinetic-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-            z-index: 10000; opacity: 0; pointer-events: none;
+        /* ULTRA UNIQUE PORTAL SLIDE */
+        .portal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 10000;
+            visibility: hidden; opacity: 0;
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             display: flex; align-items: center; justify-content: center;
-            transition: 0.4s; backdrop-filter: blur(10px);
         }
-        .kinetic-overlay.active { opacity: 1; pointer-events: auto; }
-        .kinetic-box {
-            width: 90%; max-width: 850px; height: 85vh; background: white;
-            border-radius: 30px; padding: 50px; overflow-y: auto;
-            transform: scale(0.5); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .portal-overlay.active { visibility: visible; opacity: 1; }
+        
+        .portal-card {
+            width: 90%; max-width: 1000px; height: 85vh;
+            background: #fff; border-radius: 30px;
+            display: flex; overflow: hidden;
+            transform: scale(0.8) translateY(50px);
+            transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 50px rgba(37,99,235,0.3);
         }
-        .kinetic-overlay.active .kinetic-box { transform: scale(1); }
-        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 40px; cursor: pointer; color: #000; }
-        .box-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; color: var(--primary); border-left: 10px solid #000; padding-left: 20px; }
-        .box-body h3 { margin-top: 30px; color: #000; text-transform: uppercase; font-size: 1rem; letter-spacing: 1px;}
+        .portal-overlay.active .portal-card { transform: scale(1) translateY(0); }
+
+        .portal-sidebar { width: 250px; background: #000; color: #fff; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; }
+        .portal-content { flex: 1; padding: 60px; overflow-y: auto; color: #1e293b; background: #fff; }
+        .portal-close { font-size: 35px; cursor: pointer; color: #94a3b8; align-self: flex-end; transition: 0.3s; }
+        .portal-close:hover { color: #f43f5e; transform: rotate(90deg); }
+
+        .portal-header { font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; color: #000; border-left: 8px solid var(--primary); padding-left: 20px; }
+        .portal-body h3 { font-size: 1.3rem; margin-top: 25px; color: var(--primary); }
+        .portal-body p, .portal-body li { line-height: 1.8; font-size: 1.1rem; margin-bottom: 12px; }
+        .portal-body b { color: #000; }
+        .portal-body ul { list-style: disc; padding-left: 20px; margin-top: 10px; }
+
+        @media (max-width: 768px) {
+            .portal-card { flex-direction: column; height: 95vh; }
+            .portal-sidebar { width: 100%; height: 80px; padding: 15px 30px; flex-direction: row; align-items: center; }
+            .portal-content { padding: 30px; }
+        }
     </style>
 </head>
 <body>
 
     <canvas id="canvas-web" class="no-print"></canvas>
 
-    <div class="vibe-dock no-print">
-        <button class="vibe-btn" onclick="openBox()">Detailed Bio <i class="fas fa-bolt"></i></button>
+    <div class="fab-container no-print">
+        <button class="fab-main" onclick="toggleFab()"><i class="fas fa-expand-arrows-alt"></i></button>
+        <div class="fab-list" id="fabList">
+            <div class="fab-item" onclick="openPortal('about')">About Me</div>
+            <div class="fab-item" onclick="openPortal('edu')">Education & Skills</div>
+            <div class="fab-item" onclick="openPortal('exp')">Full Experience</div>
+            <div class="fab-item" onclick="openPortal('hobbies')">Interests</div>
+            <div class="fab-item" onclick="openPortal('life')">Philosophy</div>
+        </div>
     </div>
 
-    <div id="kinetic-overlay" class="kinetic-overlay">
-        <div class="kinetic-box">
-            <span class="close-btn" onclick="closeBox()">&times;</span>
-            <h2 class="box-title">UNIQUE PROFESSIONAL INSIGHTS</h2>
-            <div class="box-body">
-                <h3>Full Professional Profile</h3>
-                <p>Born on 09-04-2001 in Vadakarai, Tenkasi. I am an IT Professional who believes that learning is a lifelong process. My background in BCA and MBA Finance allows me to approach IT infrastructure with a strategic business mindset.</p>
-                
-                <h3>Ahluwalia Contracts - Mumbai Office (Expanded)</h3>
-                <p><b>Role:</b> IT Support Engineer (April 2024 - Present)</p>
-                <ul>
-                    <li>Complete setup of site office infrastructure from scratch.</li>
-                    <li>Handling high-volume L1/L2 incident tickets within strict SLA timelines.</li>
-                    <li>Expertise in Windows 10/11 deployment and Outlook troubleshooting (PST/OST).</li>
-                    <li>Active Directory user management and group policy application.</li>
-                    <li>Network troubleshooting (LAN, VPN, DNS, DHCP) to ensure zero downtime.</li>
-                    <li>Vendor coordination for hardware procurement and ISP management.</li>
-                    <li>Endpoint security, antivirus monitoring, and patch management.</li>
-                </ul>
-
-                <h3>Life Philosophy</h3>
-                <p>"To face struggles and learn new things for self-improvement and to give full contribution to the organization."</p>
-
-                <h3>Additional Skills</h3>
-                <p>Languages: English, Tamil, Hindi. Certified in CCNA Networking Fundamentals.</p>
+    <div id="portal" class="portal-overlay">
+        <div class="portal-card">
+            <div class="portal-sidebar">
+                <div style="font-weight: 900; font-size: 1.2rem; letter-spacing: 2px;">ALAGU<br>RAGUL</div>
+                <div style="writing-mode: vertical-rl; text-transform: uppercase; font-size: 3rem; opacity: 0.1; font-weight: 900;">PORTFOLIO</div>
+                <div class="portal-close" onclick="closePortal()">&times;</div>
+            </div>
+            <div class="portal-content">
+                <h2 id="portal-title" class="portal-header"></h2>
+                <div id="portal-body" class="portal-body"></div>
             </div>
         </div>
     </div>
@@ -276,4 +267,145 @@
                     <div>
                         <p><strong>Networking:</strong> LAN/WAN, TCP/IP, DNS, DHCP, Wi‑Fi, VPN Troubleshooting</p>
                         <p style="margin-top:10px;"><strong>Tools:</strong> Microsoft 365, Outlook (PST/OST), Remote Desktop, AnyDesk, TeamViewer</p>
-                        <p style="margin-top:10px;"><strong>IT
+                        <p style="margin-top:10px;"><strong>IT Operations:</strong> Active Directory (User & Group Management), Antivirus Monitoring, Patch Management, IT Asset Management, Vendor Coordination</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glow-card">
+            <div class="card-content">
+                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL EXPERIENCE</h2>
+                <h3 style="color:var(--primary); font-size: 1.3rem;">IT Support Engineer</h3>
+                <p><strong>Ahluwalia Contracts (India) Ltd. – Mumbai</strong> | April 2024 – Present</p>
+                <div class="achievement-box">
+                    <strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.
+                </div>
+                <ul>
+                    <li>Act as first point of contact for IT support, resolving L1/L2 incidents related to hardware, Windows OS, applications, email, and network connectivity.</li>
+                    <li>Handle high-volume service requests and incidents via email and service desk tools while consistently meeting SLA targets.</li>
+                    <li>Install, configure, and troubleshoot Windows 10/11 systems, MS Office, Outlook, and end-user applications.</li>
+                    <li>Manage Active Directory tasks including user creation, password resets, access permissions, and basic group management.</li>
+                    <li>Diagnose and resolve LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity issues to minimize user downtime.</li>
+                    <li>Provide remote and onsite support using AnyDesk, TeamViewer, and Remote Desktop.</li>
+                    <li>Support enterprise email platforms including Zimbra and Exchange (basic troubleshooting).</li>
+                    <li>Perform endpoint security tasks such as antivirus monitoring, patch updates, and system health checks.</li>
+                    <li>Coordinate with vendors, OEMs, and ISPs for hardware replacements, warranty claims, and network escalations.</li>
+                    <li>Assist in root cause analysis (RCA) for recurring issues and document permanent fixes.</li>
+                    <li>Maintain IT asset records, SOPs, technical documentation, and knowledge base articles.</li>
+                    <li>Support employee onboarding and offboarding by provisioning system access and configuring devices.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="glow-card">
+            <div class="card-content">
+                <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">EDUCATION</h2>
+                <p><strong>Master of Business Administration (MBA) – Financial Management</strong></p>
+                <p>Alagappa University | Dec 2024 | CGPA: 7.0</p>
+                <p style="margin-top:15px;"><strong>Bachelor of Computer Applications (BCA)</strong></p>
+                <p>Kalasalingam Academy of Research and Education | Jun 2021 | CGPA: 6.83</p>
+            </div>
+        </section>
+
+        <div class="footer-actions no-print">
+            <a href="#" class="btn-download-black">Download Resume</a>
+            <a href="#" class="btn-download-black">Download Cover Letter</a>
+        </div>
+    </div>
+
+    <script>
+        const portalData = {
+            about: {
+                title: "About Me",
+                body: `<p>I am <b>Alagu Ragul</b>, an IT professional based in Mumbai, originally from <b>Vadakarai, Tenkasi</b>. My career is built on the foundation of technical curiosity and a deep commitment to excellence in IT operations.</p>
+                       <p>With a blend of technical (BCA) and management (MBA) education, I bridge the gap between technical execution and organizational strategy.</p>`
+            },
+            edu: {
+                title: "Education & Certifications",
+                body: `<p><b>Master of Business Administration (MBA)</b><br>Alagappa University | CGPA: 7.0<br>Specialized in Financial Management to understand the business side of IT operations.</p>
+                       <p><b>Bachelor of Computer Applications (BCA)</b><br>Kalasalingam Academy | CGPA: 6.83</p>
+                       <p><b>CCNA Certified</b><br>Proficient in LAN/WAN, Switching, and Routing fundamentals.</p>`
+            },
+            exp: {
+                title: "Full Professional Experience",
+                body: `<h3>IT Support Engineer</h3>
+                       <p><b>Ahluwalia Contracts (India) Ltd. – Mumbai</b> | April 2024 – Present</p>
+                       <p style="background:#f1f5f9; padding:15px; border-left:4px solid black;"><b>Key Achievement:</b> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.</p>
+                       <ul>
+                            <li><b>Incident Management:</b> First point of contact for L1/L2 hardware, Windows OS, applications, and network issues.</li>
+                            <li><b>Service Desk:</b> Handle high-volume ticket queues via email and tools within strict SLA targets.</li>
+                            <li><b>OS & Software:</b> Expert in installing and troubleshooting Windows 10/11, MS Office, and Outlook.</li>
+                            <li><b>Identity Management:</b> Managing Active Directory (User creation, password resets, permissions).</li>
+                            <li><b>Network Support:</b> Diagnosing LAN, Wi‑Fi, VPN, DNS, and DHCP connectivity.</li>
+                            <li><b>Remote Tools:</b> Skilled in AnyDesk, TeamViewer, and Remote Desktop support.</li>
+                            <li><b>Enterprise Mail:</b> Troubleshooting Zimbra and Microsoft Exchange environments.</li>
+                            <li><b>Security:</b> Monitoring antivirus status, deploying patches, and health checks.</li>
+                            <li><b>Vendor Liaison:</b> Coordinating with ISPs and OEMs for hardware/internet escalations.</li>
+                            <li><b>Documentation:</b> Creating SOPs and maintaining detailed IT asset records.</li>
+                            <li><b>HR Support:</b> Managing IT onboarding/offboarding for new employees.</li>
+                       </ul>`
+            },
+            hobbies: {
+                title: "Hobbies & Interests",
+                body: `<p><b>Tech Exploration:</b> Constantly testing new software and system optimization tools.</p>
+                       <p><b>Travel:</b> Exploring natural landscapes which offers a fresh perspective on problem-solving.</p>
+                       <p><b>Hardware Modding:</b> Deep interest in system builds and hardware architecture.</p>`
+            },
+            life: {
+                title: "Life Philosophy",
+                body: `<p>I believe in <b>"Relentless Troubleshooting."</b> No technical issue is unsolvable; it only requires the right approach and continuous learning. My professional goal is to ensure zero downtime for the people I support.</p>`
+            }
+        };
+
+        function toggleFab() { document.getElementById('fabList').classList.toggle('show'); }
+        function openPortal(key) {
+            const data = portalData[key];
+            document.getElementById('portal-title').innerText = data.title;
+            document.getElementById('portal-body').innerHTML = data.body;
+            document.getElementById('portal').classList.add('active');
+            toggleFab();
+        }
+        function closePortal() { document.getElementById('portal').classList.remove('active'); }
+
+        // CANVAS WEB
+        const canvas = document.getElementById('canvas-web');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const properties = { count: 80, speed: 0.5, lineLength: 150, particleColor: 'rgba(37, 99, 235, 0.2)', lineColor: 'rgba(37, 99, 235, 0.1)' };
+        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+        window.onresize();
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.velX = (Math.random() - 0.5) * properties.speed;
+                this.velY = (Math.random() - 0.5) * properties.speed;
+            }
+            update() {
+                if (this.x < 0 || this.x > canvas.width) this.velX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.velY *= -1;
+                this.x += this.velX; this.y += this.velY;
+            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fillStyle = properties.particleColor; ctx.fill(); }
+        }
+        function init() { for (let i = 0; i < properties.count; i++) particles.push(new Particle()); loop(); }
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i in particles) {
+                particles[i].update(); particles[i].draw();
+                for (let j in particles) {
+                    let dist = Math.sqrt(Math.pow(particles[i].x - particles[j].x, 2) + Math.pow(particles[i].y - particles[j].y, 2));
+                    if (dist < properties.lineLength) {
+                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = properties.lineColor; ctx.lineWidth = 1; ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(loop);
+        }
+        function toggleMenu() { document.getElementById("hireMenu").classList.toggle("show"); }
+        init();
+    </script>
+</body>
+</html>
