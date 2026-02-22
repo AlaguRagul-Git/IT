@@ -5,24 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALAGU RAGUL M | IT Support Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
             --dark: #0f172a;
             --text: #334155;
             --bg: #ffffff;
-            --glass: rgba(255, 255, 255, 0.09);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --shadow: 0 25px 60px -20px rgba(0,0,0,0.22);
+            --terminal-bg: #0a0f1c;
+            --terminal-text: #d4f1ff;
+            --accent: #00eaff;
+            --accent-dim: #00aaff;
+            --grid: rgba(0, 234, 255, 0.06);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-       
+
         @media print {
-            nav, .no-print, .footer-actions, #canvas-web, .fab-container { display: none !important; }
+            nav, .no-print, .footer-actions, #canvas-web, .fab-container, .copyright { display: none !important; }
             body { background: white !important; }
             .glow-card { border: 1px solid #ccc !important; box-shadow: none !important; }
             .glow-card::before { display: none !important; }
         }
+
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -30,12 +34,15 @@
             overflow-x: hidden;
             position: relative;
         }
+
         #canvas-web {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; background: #ffffff;
         }
+
         .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+
         nav {
             padding: 15px 0;
             background: rgba(255, 255, 255, 0.9);
@@ -45,7 +52,9 @@
             z-index: 999;
             border-bottom: 1px solid #e2e8f0;
         }
+
         nav .container { display: flex; justify-content: space-between; align-items: center; }
+
         .btn-hire {
             background: var(--dark);
             color: white;
@@ -59,7 +68,9 @@
             gap: 10px;
             transition: 0.3s;
         }
+
         .btn-hire:hover { background: var(--primary); transform: translateY(-2px); }
+
         .dropdown {
             display: none;
             position: absolute;
@@ -72,11 +83,17 @@
             padding: 8px;
             border: 1px solid #e2e8f0;
         }
+
         .dropdown.show { display: block; animation: fadeIn 0.3s; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
         .dropdown a { display: block; padding: 12px; color: var(--dark); text-decoration: none; font-weight: 700; border-radius: 8px; }
+
         .dropdown a:hover { background: #f1f5f9; color: var(--primary); }
+
         header { text-align: center; margin: 60px 0; }
+
         .cyber-name {
             font-size: 4rem;
             font-weight: 900;
@@ -87,6 +104,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .glow-card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(5px);
@@ -97,6 +115,7 @@
             overflow: hidden;
             border: 1px solid #e2e8f0;
         }
+
         .glow-card::before {
             content: '';
             position: absolute;
@@ -104,13 +123,17 @@
             background: conic-gradient(transparent, transparent, var(--primary), transparent);
             animation: rotate 6s linear infinite;
         }
+
         .glow-card::after {
             content: '';
             position: absolute; inset: 2px;
             background: white; border-radius: 18px;
         }
+
         .card-content { position: relative; z-index: 2; }
+
         @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         .achievement-box {
             background: #f0fdf4;
             padding: 20px;
@@ -120,10 +143,15 @@
             font-size: 0.95rem;
             color: #14532d;
         }
+
         ul { list-style: none; }
+
         li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 0.95rem; line-height: 1.6; }
+
         li::before { content: "•"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
-        .footer-actions { text-align: center; margin: 80px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+        .footer-actions { text-align: center; margin: 80px 0 40px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
         .btn-download-black {
             padding: 14px 28px;
             font-size: 16px;
@@ -139,7 +167,25 @@
             transition: all 0.3s ease;
             border: none;
         }
+
         .btn-download-black:hover { background: #333; transform: translateY(-3px); }
+
+        .copyright {
+            text-align: center;
+            padding: 50px 0 80px;
+            color: #64748b;
+            font-size: 0.95rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 60px;
+        }
+
+        .copyright small {
+            display: block;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* FAB (unchanged) */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
         .fab-main { width: 60px; height: 60px; background: #000; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); transition: 0.4s; }
         .fab-list { display: none; flex-direction: column; gap: 10px; align-items: flex-end; }
@@ -148,156 +194,186 @@
         .fab-item { background: white; color: black; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; border: 2px solid black; cursor: pointer; transition: 0.3s; box-shadow: 4px 4px 0px black; }
         .fab-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--primary); color: var(--primary); }
 
-        /* ────────────────────────────────
-           UNIQUE SUBSECTION PORTAL (updated)
-           Fixed close button + more distinctive style
-           ──────────────────────────────── */
+        /* ────────────────────────────────────────
+           UNIQUE SUBSECTION STYLE – TERMINAL V2
+           ──────────────────────────────────────── */
         .portal-overlay {
             position: fixed; inset: 0;
-            background: rgba(15, 23, 42, 0.78);
-            backdrop-filter: blur(8px);
+            background: rgba(5, 10, 25, 0.96);
             z-index: 10000;
             visibility: hidden; opacity: 0;
-            transition: all 0.55s ease;
+            transition: opacity 0.6s ease;
             display: flex; align-items: center; justify-content: center;
             padding: 20px;
         }
-        .portal-overlay.active {
-            visibility: visible; opacity: 1;
-        }
+        .portal-overlay.active { visibility: visible; opacity: 1; }
+
         .portal-card {
-            width: 100%; max-width: 1120px;
-            height: 86vh; max-height: 940px;
-            background: var(--glass);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-radius: 32px;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.08);
-            display: flex; overflow: hidden;
-            transform: scale(0.9) translateY(30px);
+            width: 100%; max-width: 1180px;
+            height: 88vh; max-height: 960px;
+            background: var(--terminal-bg);
+            border: 1px solid rgba(0, 234, 255, 0.18);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 234, 255, 0.12);
+            display: flex;
+            position: relative;
+            transform: scale(0.92);
             opacity: 0;
-            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+
         .portal-overlay.active .portal-card {
-            transform: scale(1) translateY(0);
+            transform: scale(1);
             opacity: 1;
         }
+
+        .portal-grid {
+            position: absolute; inset: 0;
+            background-image: 
+                linear-gradient(to right, var(--grid) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .portal-scan {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            box-shadow: 0 0 15px var(--accent);
+            animation: scanline 7s linear infinite;
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(2000%); }
+        }
+
         .portal-sidebar {
             width: 340px;
-            background: linear-gradient(155deg, #0f172a 0%, #1e293b 100%);
-            color: white;
-            padding: 60px 40px;
+            background: linear-gradient(160deg, #0b1324, #121b38);
+            border-right: 1px solid rgba(0, 234, 255, 0.14);
+            padding: 50px 35px;
+            color: var(--terminal-text);
+            font-family: 'Roboto Mono', monospace;
             display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .portal-sidebar .name {
-            font-size: 1.7rem;
-            font-weight: 900;
-            letter-spacing: 2.5px;
-            line-height: 1.15;
-        }
-        .portal-sidebar .role {
-            font-size: 0.95rem;
-            opacity: 0.75;
-            margin-top: 12px;
-            letter-spacing: 0.5px;
-        }
-        .portal-close-wrapper {
             position: relative;
+            z-index: 2;
         }
+
+        .portal-sidebar .name {
+            font-size: 1.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(0,234,255,0.4);
+        }
+
+        .portal-sidebar .role {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 6px;
+        }
+
         .portal-close {
-            position: absolute;
-            top: -20px; right: -20px;
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.25);
+            width: 52px;
+            height: 52px;
+            background: rgba(0,234,255,0.08);
+            border: 1px solid rgba(0,234,255,0.25);
             border-radius: 50%;
-            color: white;
-            font-size: 2.2rem;
+            color: var(--accent);
+            font-size: 1.9rem;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.25s ease;
-            transform: translate(0,0);
+            transition: all 0.2s ease;
+            align-self: flex-end;
         }
+
         .portal-close:hover {
-            background: rgba(255,255,255,0.22);
-            transform: scale(1.08);
+            background: rgba(0,234,255,0.18);
+            box-shadow: 0 0 20px rgba(0,234,255,0.3);
         }
+
         .portal-content {
             flex: 1;
-            padding: 70px 80px;
+            padding: 60px 70px;
             overflow-y: auto;
-            background: rgba(248, 250, 252, 0.96);
-        }
-        .portal-header {
-            font-size: 2.6rem;
-            font-weight: 900;
-            color: var(--dark);
-            margin-bottom: 40px;
+            color: var(--terminal-text);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.05rem;
+            line-height: 1.8;
             position: relative;
-            display: inline-block;
-            letter-spacing: -0.6px;
+            z-index: 2;
         }
-        .portal-header::after {
-            content: '';
-            position: absolute;
-            bottom: -14px; left: 0;
-            width: 100px; height: 5px;
-            background: var(--primary);
-            border-radius: 3px;
-        }
-        .portal-text {
-            font-size: 1.12rem;
-            line-height: 1.95;
-            color: var(--text);
-        }
-        .portal-text b, .portal-text strong {
-            color: var(--dark);
+
+        .portal-header {
+            font-size: 2.4rem;
             font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 12px rgba(0,234,255,0.5);
         }
+
         .portal-text h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin: 48px 0 20px;
-            font-weight: 800;
+            color: #a5eeff;
+            font-size: 1.4rem;
+            margin: 45px 0 18px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0,234,255,0.2);
+            padding-bottom: 10px;
         }
+
+        .portal-text p, .portal-text li {
+            margin-bottom: 1.1rem;
+        }
+
+        .portal-text strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
         .portal-text ul {
             list-style: none;
             padding-left: 0;
+            margin: 1.5rem 0;
         }
+
         .portal-text ul li {
             position: relative;
-            padding-left: 36px;
-            margin-bottom: 18px;
-            font-size: 1.08rem;
+            padding-left: 2.2rem;
+            margin-bottom: 1rem;
         }
+
         .portal-text ul li::before {
-            content: "◆";
+            content: "→";
             position: absolute;
-            left: 4px;
-            color: var(--primary);
-            font-size: 0.9rem;
+            left: 0;
+            color: var(--accent-dim);
+            font-weight: bold;
         }
+
+        .portal-text .achievement {
+            background: rgba(0,234,255,0.06);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin: 2rem 0;
+            border-radius: 6px;
+            font-style: italic;
+        }
+
         @media (max-width: 768px) {
-            .portal-card { flex-direction: column; height: 92vh; }
-            .portal-sidebar {
-                width: 100%; height: auto;
-                padding: 32px 24px;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .portal-close {
-                position: static;
-                width: 48px;
-                height: 48px;
-                font-size: 2rem;
-            }
-            .portal-content { padding: 50px 32px; }
-            .portal-header { font-size: 2.2rem; }
+            .portal-card { flex-direction: column; height: 94vh; }
+            .portal-sidebar { width: 100%; height: auto; padding: 30px 25px; flex-direction: row; justify-content: space-between; align-items: center; }
+            .portal-close { width: 48px; height: 48px; font-size: 1.8rem; }
+            .portal-content { padding: 45px 30px; }
+            .portal-header { font-size: 2rem; }
         }
     </style>
 </head>
@@ -313,16 +389,17 @@
             <div class="fab-item" onclick="openPortal('life')">Philosophy</div>
         </div>
     </div>
+
     <div id="portal" class="portal-overlay">
         <div class="portal-card">
+            <div class="portal-grid"></div>
+            <div class="portal-scan"></div>
             <div class="portal-sidebar">
                 <div>
-                    <div class="name">ALAGU<br>RAGUL</div>
+                    <div class="name">ALAGU RAGUL</div>
                     <div class="role">IT SUPPORT ENGINEER</div>
                 </div>
-                <div class="portal-close-wrapper">
-                    <div class="portal-close" onclick="closePortal()">×</div>
-                </div>
+                <div class="portal-close" onclick="closePortal()">×</div>
             </div>
             <div class="portal-content">
                 <h2 id="portal-title" class="portal-header"></h2>
@@ -330,6 +407,7 @@
             </div>
         </div>
     </div>
+
     <nav>
         <div class="container">
             <div style="font-weight:900; color:var(--dark)">ALAGU RAGUL</div>
@@ -343,18 +421,21 @@
             </div>
         </div>
     </nav>
+
     <div class="container">
         <header>
             <h1 class="cyber-name">ALAGU RAGUL M</h1>
             <p style="font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-top: 10px;">IT Support Engineer | L1/L2 | Windows, AD, Networking</p>
             <p style="margin-top: 5px; color: var(--text);">Tamil Nadu, India | +91 78457 14920 | ragulmariyappan@gmail.com</p>
         </header>
+
         <section class="glow-card">
             <div class="card-content">
                 <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL SUMMARY</h2>
                 <p>IT Support Engineer with hands-on L1/L2 experience supporting enterprise users in corporate environments. Proven ability to handle high-volume ticket queues, resolve hardware, OS, network, and email issues within SLA, and reduce downtime through structured troubleshooting. Experienced in Active Directory user management, endpoint support, vendor coordination, and IT asset management. Strong at root-cause analysis and documentation. Seeking growth toward IT operations/ senior desktop support roles.</p>
             </div>
         </section>
+
         <section class="glow-card">
             <div class="card-content">
                 <h2 style="margin-bottom:20px; font-weight:900; color: var(--dark);">CORE SKILLS</h2>
@@ -372,6 +453,7 @@
                 </div>
             </div>
         </section>
+
         <section class="glow-card">
             <div class="card-content">
                 <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">PROFESSIONAL EXPERIENCE</h2>
@@ -396,6 +478,7 @@
                 </ul>
             </div>
         </section>
+
         <section class="glow-card">
             <div class="card-content">
                 <h2 style="margin-bottom:15px; font-weight:900; color: var(--dark);">EDUCATION</h2>
@@ -405,73 +488,82 @@
                 <p>Kalasalingam Academy of Research and Education | Jun 2021 | CGPA: 6.83</p>
             </div>
         </section>
+
         <div class="footer-actions no-print">
             <a href="#" class="btn-download-black">Download Resume</a>
             <a href="#" class="btn-download-black">Download Cover Letter</a>
         </div>
+
+        <div class="copyright">
+            <p>© <span id="currentYear"></span> Alagu Ragul M. All rights reserved.</p>
+            <small>Designed & Developed by Alagu Ragul</small>
+        </div>
     </div>
 
     <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
         const portalData = {
             about: {
                 title: "About Me",
-                body: `<p>Hello, I am <b>Alagu Ragul</b>.</p>
-                       <p>I was born on 09-04-2001 in Vadakarai, Tenkasi District, Tamil Nadu, India. I completed my school education up to 10th grade in government schools in my native place. After that, I completed 11th and 12th grade at S.N.R Higher Secondary School, Sankarankovil.</p>
-                       <p>Following my higher secondary education, I pursued my undergraduate degree in Bachelor of Computer Applications (BCA) at Kalasalingam Academy of Research and Education (Deemed University), Anand Nagar, Krishnankoil, Tamil Nadu.</p>
-                       <p>In 2021–2022, I focused on preparing for government examinations to expand my career opportunities. During this period, I also enrolled in a CCNA course at Sansbound Network School, West Mambalam, Chennai, where I gained hands-on knowledge in networking fundamentals.</p>
-                       <p>Later, I pursued a Master of Business Administration (MBA) in Financial Management through distance education at Alagappa University, Karaikudi, Tamil Nadu (2022–2024).</p>
-                       <p>Since April 2024, I have been working professionally as an IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai, where I support enterprise IT operations and contribute to smooth organizational IT workflows.</p>`
+                body: `Hello, I am <strong>Alagu Ragul</strong>.<br><br>I was born on 09-04-2001 in Vadakarai, Tenkasi District, Tamil Nadu, India. I completed my school education up to 10th grade in government schools in my native place. After that, I completed 11th and 12th grade at S.N.R Higher Secondary School, Sankarankovil.<br><br>Following my higher secondary education, I pursued my undergraduate degree in Bachelor of Computer Applications (BCA) at Kalasalingam Academy of Research and Education (Deemed University), Anand Nagar, Krishnankoil, Tamil Nadu.<br><br>In 2021–2022, I focused on preparing for government examinations to expand my career opportunities. During this period, I also enrolled in a CCNA course at Sansbound Network School, West Mambalam, Chennai, where I gained hands-on knowledge in networking fundamentals.<br><br>Later, I pursued a Master of Business Administration (MBA) in Financial Management through distance education at Alagappa University, Karaikudi, Tamil Nadu (2022–2024).<br><br>Since April 2024, I have been working professionally as an IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai, where I support enterprise IT operations and contribute to smooth organizational IT workflows.`
             },
             edu: {
                 title: "Education & Certifications",
-                body: `<h3>Schooling:</h3>
+                body: `<h3>Schooling</h3>
                        <ul>
                            <li>Up to 10th: Government Schools, Vadakarai, Tamil Nadu</li>
                            <li>11th–12th: S.N.R Higher Secondary School, Sankarankovil, Tamil Nadu</li>
                        </ul>
-                       <h3>Undergraduate:</h3>
+                       <h3>Undergraduate</h3>
                        <p>Bachelor of Computer Applications (BCA), Kalasalingam Academy of Research and Education, Anand Nagar, Krishnankoil, Tamil Nadu</p>
-                       <h3>Postgraduate:</h3>
+                       <h3>Postgraduate (Distance Education)</h3>
                        <p>Master of Business Administration (MBA) in Financial Management, Alagappa University, Karaikudi, Tamil Nadu (2022–2024). University recognized by UGC.</p>
-                       <h3>Certifications:</h3>
+                       <h3>Certifications</h3>
                        <p>CCNA – Networking Fundamentals, Sansbound Network School, West Mambalam, Chennai</p>`
             },
             exp: {
                 title: "Professional Career",
-                body: `<p><b>Current Position:</b> IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai (April 2024 – Present)</p>
-                       <h3>Organization Details:</h3>
-                       <p>Registered Office: New Delhi-110020 | Mumbai Office: Kalina, Santacruz (E), Mumbai-400098</p>
-                       <h3>Responsibilities:</h3>
+                body: `<p><strong>Current Position:</strong> IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai (April 2024 – Present)</p>
+                       <p><strong>Organization Details:</strong><br>Registered Office: New Delhi-110020<br>Mumbai Office: Kalina, Santacruz (E), Mumbai-400098</p>
+                       <div class="achievement"><strong>Key Achievement:</strong> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, including LAN configuration, switch connectivity, system deployment, printer setup, IP configuration, and Active Directory user provisioning. Ensured smooth operational go-live with minimal post-deployment issues.</div>
+                       <h3>Key Responsibilities</h3>
                        <ul>
-                           <li>L1/L2 support for hardware, OS, apps, and networks.</li>
-                           <li>SLA management via service desk tools.</li>
-                           <li>Active Directory user and group management.</li>
-                           <li>Endpoint security and antivirus monitoring.</li>
-                           <li>Vendor and ISP coordination.</li>
-                       </ul>
-                       <p><b>Key Achievement:</b> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, ensuring smooth operational go-live.</p>`
+                           <li>Act as first point of contact for IT support, resolving L1/L2 incidents related to hardware, Windows OS, applications, email, and network connectivity.</li>
+                           <li>Handle high-volume service requests and incidents via email and service desk tools while consistently meeting SLA targets.</li>
+                           <li>Install, configure, and troubleshoot Windows 10/11 systems, MS Office, Outlook, and end-user applications.</li>
+                           <li>Manage Active Directory tasks including user creation, password resets, access permissions, and basic group management.</li>
+                           <li>Diagnose and resolve LAN, Wi-Fi, VPN, DNS, and DHCP connectivity issues to minimize user downtime.</li>
+                           <li>Provide remote and onsite support using AnyDesk, TeamViewer, and Remote Desktop.</li>
+                           <li>Support enterprise email platforms including Zimbra and Exchange (basic troubleshooting).</li>
+                           <li>Perform endpoint security tasks such as antivirus monitoring, patch updates, and system health checks.</li>
+                           <li>Coordinate with vendors, OEMs, and ISPs for hardware replacements, warranty claims, and network escalations.</li>
+                           <li>Assist in root cause analysis (RCA) for recurring issues and document permanent fixes.</li>
+                           <li>Maintain IT asset records, SOPs, technical documentation, and knowledge base articles.</li>
+                           <li>Support employee onboarding and offboarding by provisioning system access and configuring devices.</li>
+                       </ul>`
             },
             hobbies: {
                 title: "Interests & Hobbies",
                 body: `<ul>
-                           <li><b>Continuous Learning:</b> Exploring new technologies and IT tools.</li>
-                           <li><b>Technology Exploration:</b> Researching emerging tech and practical applications.</li>
-                           <li><b>Travel & Nature:</b> Exploring natural landscapes to gain fresh perspectives.</li>
-                           <li><b>Problem-Solving:</b> Analyzing challenges and finding efficient solutions.</li>
+                           <li><strong>Continuous Learning:</strong> Exploring new technologies and IT tools.</li>
+                           <li><strong>Technology Exploration:</strong> Researching emerging tech and practical applications.</li>
+                           <li><strong>Travel & Nature:</strong> Exploring natural landscapes to gain fresh perspectives.</li>
+                           <li><strong>Problem-Solving:</strong> Analyzing challenges and finding efficient solutions.</li>
                        </ul>`
             },
             life: {
                 title: "Life Philosophy",
-                body: `<p>I believe in <b>continuous learning and self-improvement</b>, embracing challenges as opportunities to grow.</p>
+                body: `<p>I believe in <strong>continuous learning and self-improvement</strong>, embracing challenges as opportunities to grow.</p>
                        <p>My goal is to contribute fully to the organization while building expertise in new technologies. I am motivated by opportunities to face struggles, learn new skills, and expand my professional capabilities.</p>
                        <p>Committed to perseverance, discipline, and delivering high-quality results in IT support and operations.</p>`
             }
         };
 
-        function toggleFab() { 
-            document.getElementById('fabList').classList.toggle('show'); 
+        function toggleFab() {
+            document.getElementById('fabList').classList.toggle('show');
         }
-       
+
         function openPortal(key) {
             const data = portalData[key];
             document.getElementById('portal-title').innerText = data.title;
@@ -479,9 +571,9 @@
             document.getElementById('portal').classList.add('active');
             document.getElementById('fabList').classList.remove('show');
         }
-       
-        function closePortal() { 
-            document.getElementById('portal').classList.remove('active'); 
+
+        function closePortal() {
+            document.getElementById('portal').classList.remove('active');
         }
 
         const canvas = document.getElementById('canvas-web');
