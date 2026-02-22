@@ -132,7 +132,7 @@
         li { margin-bottom: 10px; padding-left: 20px; position: relative; font-size: 0.95rem; line-height: 1.6; }
         li::before { content: "•"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
 
-        /* BLACK FOOTER BUTTONS */
+        /* FOOTER ACTIONS */
         .footer-actions { text-align: center; margin: 80px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .btn-download-black {
             padding: 14px 28px;
@@ -151,7 +151,7 @@
         }
         .btn-download-black:hover { background: #333; transform: translateY(-3px); }
 
-        /* FLOATING ACTION MENU */
+        /* FAB MENU */
         .fab-container { position: fixed; bottom: 30px; right: 30px; z-index: 1000; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
         .fab-main { width: 60px; height: 60px; background: #000; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); transition: 0.4s; }
         .fab-list { display: none; flex-direction: column; gap: 10px; align-items: flex-end; }
@@ -160,48 +160,39 @@
         .fab-item { background: white; color: black; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; border: 2px solid black; cursor: pointer; transition: 0.3s; box-shadow: 4px 4px 0px black; }
         .fab-item:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--primary); color: var(--primary); }
 
-        /* ULTRA UNIQUE PORTAL SLIDE */
+        /* SUBSECTION PORTAL DESIGN */
         .portal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 10000;
+            background: rgba(15, 23, 42, 0.95); z-index: 10000;
             visibility: hidden; opacity: 0;
-            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            display: flex; align-items: center; justify-content: center;
-            backdrop-filter: blur(10px);
+            transition: 0.4s; display: flex; align-items: center; justify-content: center;
         }
         .portal-overlay.active { visibility: visible; opacity: 1; }
         
         .portal-card {
-            width: 95%; max-width: 1100px; height: 90vh;
-            background: #fff; border-radius: 40px;
+            width: 90%; max-width: 1000px; height: 85vh;
+            background: #fff; border-radius: 30px;
             display: flex; overflow: hidden;
-            transform: translateY(100%);
-            transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: scale(0.9); transition: 0.5s;
         }
-        .portal-overlay.active .portal-card { transform: translateY(0); }
+        .portal-overlay.active .portal-card { transform: scale(1); }
 
-        .portal-sidebar { width: 300px; background: #000; color: #fff; padding: 50px; display: flex; flex-direction: column; justify-content: space-between; position: relative;}
-        .portal-sidebar::after { content:''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: rgba(255,255,255,0.2); }
-        
-        .portal-content { flex: 1; padding: 60px; overflow-y: auto; color: #1e293b; background: #fff; scroll-behavior: smooth; }
-        .portal-close { font-size: 35px; cursor: pointer; color: #fff; transition: 0.3s; background: rgba(255,255,255,0.1); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .portal-close:hover { background: #f43f5e; transform: rotate(90deg); }
+        .portal-sidebar { width: 280px; background: #000; color: #fff; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; }
+        .portal-content { flex: 1; padding: 50px; overflow-y: auto; background: #f8fafc; }
+        .portal-close { font-size: 40px; cursor: pointer; color: #94a3b8; line-height: 1; }
+        .portal-close:hover { color: #f43f5e; }
 
-        .portal-header { font-size: 3rem; font-weight: 900; margin-bottom: 30px; color: #000; line-height: 1; }
-        .portal-body { font-size: 1.15rem; line-height: 1.8; color: #475569; }
-        .portal-body h3 { font-size: 1.4rem; color: #000; margin: 30px 0 15px; border-bottom: 2px solid var(--primary); display: inline-block;}
-        .portal-body b { color: #000; }
-        .portal-body ul { margin-top: 15px; }
-        .portal-body li { margin-bottom: 12px; padding-left: 25px; position: relative; }
-        .portal-body li::before { content: '→'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
-
-        .tag-info { display: inline-block; background: #f1f5f9; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; text-transform: uppercase;}
+        .portal-header { font-size: 2.2rem; font-weight: 900; color: #000; margin-bottom: 20px; border-bottom: 4px solid var(--primary); padding-bottom: 10px; display: inline-block; }
+        .portal-text { font-size: 1.1rem; line-height: 1.8; color: #334155; }
+        .portal-text b { color: #000; }
+        .portal-text h3 { margin: 25px 0 10px; color: var(--primary); font-size: 1.3rem; }
+        .portal-text ul { list-style: disc; padding-left: 20px; }
+        .portal-text li { margin-bottom: 10px; }
 
         @media (max-width: 768px) {
-            .portal-card { flex-direction: column; border-radius: 0; height: 100vh; width: 100%; }
-            .portal-sidebar { width: 100%; height: auto; padding: 25px; flex-direction: row; align-items: center; }
+            .portal-card { flex-direction: column; height: 95vh; }
+            .portal-sidebar { width: 100%; height: 80px; padding: 20px; flex-direction: row; }
             .portal-content { padding: 30px; }
-            .portal-header { font-size: 2rem; }
         }
     </style>
 </head>
@@ -210,11 +201,11 @@
     <canvas id="canvas-web" class="no-print"></canvas>
 
     <div class="fab-container no-print">
-        <button class="fab-main" onclick="toggleFab()"><i class="fas fa-plus"></i></button>
+        <button class="fab-main" onclick="toggleFab()"><i class="fas fa-bars"></i></button>
         <div class="fab-list" id="fabList">
-            <div class="fab-item" onclick="openPortal('about')">Identity</div>
-            <div class="fab-item" onclick="openPortal('edu')">Academics</div>
-            <div class="fab-item" onclick="openPortal('exp')">Career Depth</div>
+            <div class="fab-item" onclick="openPortal('about')">About Me</div>
+            <div class="fab-item" onclick="openPortal('edu')">Education</div>
+            <div class="fab-item" onclick="openPortal('exp')">Career</div>
             <div class="fab-item" onclick="openPortal('hobbies')">Interests</div>
             <div class="fab-item" onclick="openPortal('life')">Philosophy</div>
         </div>
@@ -223,16 +214,12 @@
     <div id="portal" class="portal-overlay">
         <div class="portal-card">
             <div class="portal-sidebar">
-                <div>
-                    <div style="font-weight: 900; font-size: 1.5rem; color: var(--primary); margin-bottom: 5px;">A.R.M</div>
-                    <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.6;">Profile Deep-Dive</div>
-                </div>
+                <div style="font-weight: 900; font-size: 1.2rem; letter-spacing: 2px;">ALAGU<br>RAGUL</div>
                 <div class="portal-close" onclick="closePortal()">&times;</div>
             </div>
             <div class="portal-content">
-                <div class="tag-info" id="portal-tag">Section Detail</div>
                 <h2 id="portal-title" class="portal-header"></h2>
-                <div id="portal-body" class="portal-body"></div>
+                <div id="portal-body" class="portal-text"></div>
             </div>
         </div>
     </div>
@@ -327,43 +314,110 @@
     <script>
         const portalData = {
             about: {
-                tag: "Personal Profile",
                 title: "About Me",
                 body: `<p>Hello, I am <b>Alagu Ragul</b>.</p>
-                       <p>I was born on <b>09-04-2001</b> in Vadakarai, Tenkasi District, Tamil Nadu, India. I completed my school education up to 10th grade in government schools in my native place. After that, I completed 11th and 12th grade at <b>S.N.R Higher Secondary School</b>, Sankarankovil.</p>
-                       <p>Following my higher secondary education, I pursued my undergraduate degree in <b>Bachelor of Computer Applications (BCA)</b> at Kalasalingam Academy of Research and Education (Deemed University), Anand Nagar, Krishnankoil, Tamil Nadu.</p>
-                       <p>In 2021–2022, I focused on preparing for government examinations to expand my career opportunities. During this period, I also enrolled in a <b>CCNA course</b> at Sansbound Network School, West Mambalam, Chennai, where I gained hands-on knowledge in networking fundamentals.</p>
-                       <p>Later, I pursued a <b>Master of Business Administration (MBA)</b> in Financial Management through distance education at Alagappa University, Karaikudi, Tamil Nadu (2022–2024).</p>
-                       <p>Since April 2024, I have been working professionally as an <b>IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai</b>, where I support enterprise IT operations and contribute to smooth organizational IT workflows.</p>`
+                       <p>I was born on 09-04-2001 in Vadakarai, Tenkasi District, Tamil Nadu, India. I completed my school education up to 10th grade in government schools in my native place. After that, I completed 11th and 12th grade at S.N.R Higher Secondary School, Sankarankovil.</p>
+                       <p>Following my higher secondary education, I pursued my undergraduate degree in Bachelor of Computer Applications (BCA) at Kalasalingam Academy of Research and Education (Deemed University), Anand Nagar, Krishnankoil, Tamil Nadu.</p>
+                       <p>In 2021–2022, I focused on preparing for government examinations to expand my career opportunities. During this period, I also enrolled in a CCNA course at Sansbound Network School, West Mambalam, Chennai, where I gained hands-on knowledge in networking fundamentals.</p>
+                       <p>Later, I pursued a Master of Business Administration (MBA) in Financial Management through distance education at Alagappa University, Karaikudi, Tamil Nadu (2022–2024).</p>
+                       <p>Since April 2024, I have been working professionally as an IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai, where I support enterprise IT operations and contribute to smooth organizational IT workflows.</p>`
             },
             edu: {
-                tag: "Academic Background",
                 title: "Education & Certifications",
-                body: `<h3>Schooling</h3>
+                body: `<h3>Schooling:</h3>
                        <ul>
-                           <li><b>Up to 10th:</b> Government Schools, Vadakarai, Tamil Nadu</li>
-                           <li><b>11th–12th:</b> S.N.R Higher Secondary School, Sankarankovil, Tamil Nadu</li>
+                           <li>Up to 10th: Government Schools, Vadakarai, Tamil Nadu</li>
+                           <li>11th–12th: S.N.R Higher Secondary School, Sankarankovil, Tamil Nadu</li>
                        </ul>
-                       <h3>Undergraduate</h3>
-                       <p><b>Bachelor of Computer Applications (BCA)</b><br>Kalasalingam Academy of Research and Education, Anand Nagar, Krishnankoil, Tamil Nadu</p>
-                       <h3>Postgraduate (Distance Education)</h3>
-                       <p><b>Master of Business Administration (MBA) in Financial Management</b><br>Alagappa University, Karaikudi, Tamil Nadu (2022–2024)<br>University recognized by UGC.</p>
-                       <h3>Certifications</h3>
-                       <p><b>CCNA – Networking Fundamentals</b><br>Sansbound Network School, West Mambalam, Chennai</p>`
+                       <h3>Undergraduate:</h3>
+                       <p>Bachelor of Computer Applications (BCA), Kalasalingam Academy of Research and Education, Anand Nagar, Krishnankoil, Tamil Nadu</p>
+                       <h3>Postgraduate:</h3>
+                       <p>Master of Business Administration (MBA) in Financial Management, Alagappa University, Karaikudi, Tamil Nadu (2022–2024). University recognized by UGC.</p>
+                       <h3>Certifications:</h3>
+                       <p>CCNA – Networking Fundamentals, Sansbound Network School, West Mambalam, Chennai</p>`
             },
             exp: {
-                tag: "Work Detail",
                 title: "Professional Career",
                 body: `<p><b>Current Position:</b> IT Support Engineer at Ahluwalia Contracts (India) Ltd., Mumbai (April 2024 – Present)</p>
-                       <h3>Organization Details</h3>
-                       <p><b>Corporate Office:</b> Plot No. A-177, Okhla Industrial Area, Phase-I, New Delhi-110020</p>
-                       <p><b>Mumbai Regional Office:</b> 606, 6th Floor, Patatthu Business Plaza, Opposite Amar Brass Busstop, C.S.T. Road Kalina, Santacruz (E), Mumbai-400098</p>
-                       <h3>Responsibilities & Achievements</h3>
+                       <h3>Organization Details:</h3>
+                       <p>Registered Office: New Delhi-110020 | Mumbai Office: Kalina, Santacruz (E), Mumbai-400098</p>
+                       <h3>Responsibilities:</h3>
                        <ul>
-                           <li>Act as the first point of contact for IT support, resolving L1/L2 incidents related to hardware, Windows OS, applications, email, and network connectivity.</li>
-                           <li>Manage high-volume service requests and incidents via email and service desk tools, ensuring SLA compliance.</li>
-                           <li>Install, configure, and troubleshoot Windows 10/11 systems, Microsoft 365, Outlook (PST/OST), and end-user applications.</li>
-                           <li>Handle Active Directory tasks including user creation, password resets, access permissions, and basic group management.</li>
-                           <li>Diagnose and resolve LAN, Wi-Fi, VPN, DNS, and DHCP connectivity issues.</li>
-                           <li>Provide remote and onsite support using AnyDesk, TeamViewer, and Remote Desktop.</li>
-                           <li>Perform endpoint security tasks: antivirus monitoring, patch updates
+                           <li>L1/L2 support for hardware, OS, apps, and networks.</li>
+                           <li>SLA management via service desk tools.</li>
+                           <li>Active Directory user and group management.</li>
+                           <li>Endpoint security and antivirus monitoring.</li>
+                           <li>Vendor and ISP coordination.</li>
+                       </ul>
+                       <p><b>Key Achievement:</b> Successfully planned and supported end-to-end IT infrastructure setup for a new site office, ensuring smooth operational go-live.</p>`
+            },
+            hobbies: {
+                title: "Interests & Hobbies",
+                body: `<ul>
+                           <li><b>Continuous Learning:</b> Exploring new technologies and IT tools.</li>
+                           <li><b>Technology Exploration:</b> Researching emerging tech and practical applications.</li>
+                           <li><b>Travel & Nature:</b> Exploring natural landscapes to gain fresh perspectives.</li>
+                           <li><b>Problem-Solving:</b> Analyzing challenges and finding efficient solutions.</li>
+                       </ul>`
+            },
+            life: {
+                title: "Life Philosophy",
+                body: `<p>I believe in <b>continuous learning and self-improvement</b>, embracing challenges as opportunities to grow.</p>
+                       <p>My goal is to contribute fully to the organization while building expertise in new technologies. I am motivated by opportunities to face struggles, learn new skills, and expand my professional capabilities.</p>
+                       <p>Committed to perseverance, discipline, and delivering high-quality results in IT support and operations.</p>`
+            }
+        };
+
+        function toggleFab() { document.getElementById('fabList').classList.toggle('show'); }
+        
+        function openPortal(key) {
+            const data = portalData[key];
+            document.getElementById('portal-title').innerText = data.title;
+            document.getElementById('portal-body').innerHTML = data.body;
+            document.getElementById('portal').classList.add('active');
+            document.getElementById('fabList').classList.remove('show');
+        }
+        
+        function closePortal() { document.getElementById('portal').classList.remove('active'); }
+
+        // CANVAS WEB
+        const canvas = document.getElementById('canvas-web');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const properties = { count: 80, speed: 0.5, lineLength: 150, particleColor: 'rgba(37, 99, 235, 0.2)', lineColor: 'rgba(37, 99, 235, 0.1)' };
+        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+        window.onresize();
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.velX = (Math.random() - 0.5) * properties.speed;
+                this.velY = (Math.random() - 0.5) * properties.speed;
+            }
+            update() {
+                if (this.x < 0 || this.x > canvas.width) this.velX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.velY *= -1;
+                this.x += this.velX; this.y += this.velY;
+            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fillStyle = properties.particleColor; ctx.fill(); }
+        }
+        function init() { for (let i = 0; i < properties.count; i++) particles.push(new Particle()); loop(); }
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i in particles) {
+                particles[i].update(); particles[i].draw();
+                for (let j in particles) {
+                    let dist = Math.sqrt(Math.pow(particles[i].x - particles[j].x, 2) + Math.pow(particles[i].y - particles[j].y, 2));
+                    if (dist < properties.lineLength) {
+                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = properties.lineColor; ctx.lineWidth = 1; ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(loop);
+        }
+        function toggleMenu() { document.getElementById("hireMenu").classList.toggle("show"); }
+        init();
+    </script>
+</body>
+</html>
